@@ -14,3 +14,16 @@ def getAllPuestoNombreApellidosEmail(codigo_jefe):
            }) 
             return PuestoNombreApellidosEmail
 
+#Devuele un listado con el nombre,apellido y puesto de aquellos empleados que no sean representantes de ventas
+
+def getNombreApellidosPuesto(puesto):
+    NombreApellidosPuesto= []
+    for val in em.empleados:
+            if(val.get("puesto")!="Representante Ventas"):
+                NombreApellidosPuesto.append({
+                "nombre":val.get("nombre"),
+                "apellidos":f"{val.get('apellido1')} {val.get('apellido2')}",
+                "puesto":val.get("puesto")
+                })
+    return NombreApellidosPuesto
+
