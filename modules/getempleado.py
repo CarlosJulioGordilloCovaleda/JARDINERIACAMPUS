@@ -5,21 +5,12 @@ import storage.empleado as em
 def getAllPuestoNombreApellidosEmail(codigo_jefe):
     PuestoNombreApellidosEmail = []
     for val in em.empleados:
-        if (val.get("codigo_jefe")==codigo_jefe):
-            PuestoNombreApellidosEmail.append
-            ({
+        if (val.get("codigo_jefe")==None):
+            PuestoNombreApellidosEmail.append({
                 "puesto":val.get("puesto"),
                 "nombre":val.get("nombre"),
                 "apellidos":f"{val.get('apellido1')} {val.get('apellido2')}",
                 "email":val.get("email")
            }) 
-        else:  
-            PuestoNombreApellidosEmail.append
-            ({
-                "puesto":val.get("puesto"),
-                "nombre":val.get("nombre"),
-                "apellidos":f"{val.get('apellido1')} {val.get('apellido2')}",
-                "email":val.get("email")
-            })      
-    return PuestoNombreApellidosEmail
+            return PuestoNombreApellidosEmail
 

@@ -1,3 +1,3 @@
-import modules.getclients as cliente
+import modules.getempleado as empleado
 
-print(cliente.getAllPuestoNombreApellidosEmail(3))
+print(empleado.getAllPuestoNombreApellidosEmail(None))
