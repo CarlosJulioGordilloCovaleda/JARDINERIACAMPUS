@@ -1,18 +1,4 @@
 producto = [
-    { 
-        "codigo_producto":"",
-        "nombre":"",
-        "gama":"",
-        "dimensiones":"",
-        "proveedor":"",
-        "descripcion":"",
-        "cantidad_en_stock":"",
-        "precion_venta":1.0,
-        "precio_proveedor":1.0
-     }
-]
-
-producto = [
     {
         "codigo_producto": "11679",
         "nombre": "Sierra de Poda 400MM",
@@ -767,4 +753,7 @@ producto = [
         "gama": "Frutales",
         "dimensiones": "",
         "proveedor": "NaranjasValencianas.com",
-        "descripcion": "El limonero es... (Tiempo restante: 45 KB)
+        "descripcion": "El limonero es... (Tiempo restante: 45 KB)"
+    }
+
+]

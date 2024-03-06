@@ -1,3 +1,3 @@
 import modules.getclients as cliente
 
-print(cliente.imprimirPais())
+print(cliente.getAllPuestoNombreApellidosEmail(3))

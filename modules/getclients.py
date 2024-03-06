@@ -1,36 +1,25 @@
-import storage.cliente as cli
+import storage.empleado as em 
 
-def getAllClienteName():
-    clientName = []
-    for i, val in enumerate(cli.cliente):
-        clientName.append({
-            "nombre_cliente": val.get("nombre_cliente"),
-            "codigo_cliente": val.get("codigo_cliente")
-            })
-    return clientName
+#Devueelve el nombre  del puesto,nombre y apellido y emails del jefe de la empresa
 
-def getClienteCodigo(codigo):
-    for val in cli.cliente:
-        if(val.get("codigo_cliente") == codigo):
-            return {
-                "nombre_cliente": val.get("nombre_cliente"),
-                "codigo_cliente": val.get("codigo_cliente")
-            }
+def getAllPuestoNombreApellidosEmail(codigo_jefe):
+    PuestoNombreApellidosEmail = []
+    for val in em.empleados:
+        if (val.get("codigo_jefe")==codigo_jefe):
+            PuestoNombreApellidosEmail.append
+            ({
+                "puesto":val.get("puesto"),
+                "nombre":val.get("nombre"),
+                "apellidos":f"{val.get('apellido1')} {val.get('apellido2')}",
+                "email":val.get("email")
+           }) 
+        else:  
+            PuestoNombreApellidosEmail.append
+            ({
+                "puesto":val.get("puesto"),
+                "nombre":val.get("nombre"),
+                "apellidos":f"{val.get('apellido1')} {val.get('apellido2')}",
+                "email":val.get("email")
+            })      
+    return PuestoNombreApellidosEmail
 
-def getClienteCreditoCiudad(limiteCredito, ciudad):
-    clientPremium = []
-    for val in cli.cliente:
-        if(val.get("limite_credito") >= limiteCredito and val.get("ciudad") == ciudad):
-            clientPremium.append(val)
-    return clientPremium
-
-def getClienteRegion(region, ciudad):
-    clientPremium = []
-    for val in cli.cliente:
-        if(
-            val.get("region") == region and
-            val.get("ciudad") == ciudad
-        ):
-            clientPremium.append(val)
-    return
-    
