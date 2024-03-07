@@ -74,4 +74,26 @@ def getAllPedidosRechazados2009():
                     "codigo_cliente":val.get("codigo_cliente")
                 })
     return pedidosEntregado
+
+#Deuelve un listado de todos los pedidos que han sido entregados en el mes de enero de cualquier año
+
+def getAllPedidosEntregadosdelmesdeenero():
+    pedidosEntregado=[]
+    for val in pe.pedido:
+        fechaEntrega=val.get("fecha_entrega")
+        if val.get("estado")=="Entregado" and val.get("fecha_entrega")!=None:
+            fechaconvertida=datetime.strptime(fechaEntrega,"%Y-%m-%d")
+            if fechaconvertida.month==1:
+                pedidosEntregado.append({
+                    "codigo_pedido":val.get("codigo_pedido"),
+                    "fecha_pedido":val.get("fecha_pedido"),
+                    "fecha_esperada":val.get("fecha_esperada"),
+                    "fecha_entrega":val.get("fecha_entrega"),
+                    "estado":val.get("estado"),
+                    "comentarios":val.get("comentario"),
+                    "codigo_cliente":val.get("codigo_cliente")
+                })
+    return pedidosEntregado
+
+
                 
