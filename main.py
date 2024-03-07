@@ -1,3 +1,4 @@
+from tabulate import tabulate
 import modules.getempleado as empleado
 import modules.getclientes as clientes
 import modules.getpedidos as pedidos
@@ -8,7 +9,8 @@ import datetime
 #print(empleado.getNombreApellidosPuesto("Representante Ventas"))
 print()
 #print(clientes.Nombres("pais"))
-print()
 #print(pedidos.getAllDiferentesEstados("estado"))
-print()
-print(pagos.getCodigosClientes2008("codigo_cliente"))
+#print(pagos.getCodigosClientes2008("codigo_cliente"))
+#print(pedidos.getAllPedidosEntregadosAtrasadosdeTiempo())
+#print(tabulate(pedidos.getAllPedidosEntregadosdosdiasantesdeTiempo(),tablefmt="grid"))
+print(tabulate(pedidos.getAllPedidosRechazados2009(),tablefmt="grid"))
