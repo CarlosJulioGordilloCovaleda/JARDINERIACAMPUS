@@ -1,5 +1,5 @@
 import storage.empleado as em 
-
+from tabulate import tabulate
 #Devueelve el nombre  del puesto,nombre y apellido y emails del jefe de la empresa
 
 def getAllPuestoNombreApellidosEmail(codigo_jefe):
@@ -21,9 +21,25 @@ def getNombreApellidosPuesto(puesto):
     for val in em.empleados:
             if(val.get("puesto")!="Representante Ventas"):
                 NombreApellidosPuesto.append({
-                "nombre":val.get("nombre"),
+                "Nombre":val.get("nombre"),
                 "apellidos":f"{val.get('apellido1')} {val.get('apellido2')}",
                 "puesto":val.get("puesto")
                 })
     return NombreApellidosPuesto
 
+def menu():
+    print(""" 
+                     Reporte Empleados
+           
+           1. Datos del Jefe de la Empresa
+           2. listado con el nombre,apellido y puesto de aquellos empleados que no sean representantes de ventas
+
+""")
+    opcion=int(input(" Ingrese una opción : "))
+    if opcion==1:
+        codigo_jefe=None
+        print(tabulate(getAllPuestoNombreApellidosEmail(codigo_jefe), headers="keys", tablefmt="github"))
+
+    elif opcion==2:
+         puesto="Representante Ventas"
+         print(tabulate(getNombreApellidosPuesto(puesto),headers="keys", tablefmt="github"))
