@@ -1,12 +1,13 @@
 import storage.pedido as pe
 from datetime import datetime
+from tabulate import tabulate
 #Devuelve un listado con los distintos estados por los que puede pasar un pedido
-def getAllDiferentesEstados(estado):
+def getAllDiferentesEstados():
     DiferentesEstados=set()
     for val in pe.pedido:
         if val.get("estado") != None:
             DiferentesEstados.add(val.get("estado"))
-    lista_DiferentesEstados=list(DiferentesEstados)
+    lista_DiferentesEstados=[{"Estado del pedido": vall} for vall in DiferentesEstados]
     return lista_DiferentesEstados
 # Devuelve un listado con el codigo de pedido,
 #codigo de cliente,fecha esperada y fecha de entrega 
@@ -25,10 +26,10 @@ def getAllPedidosEntregadosAtrasadosdeTiempo():
             diff=end.date()-star.date()
             if diff.days<0:
                 pedidosEntregado.append({
-                    "codigo_de_pedido":val.get("codigo_pedido"),
-                    "codigo_de_cliente":val.get("codigo_cliente"),
-                    "fecha_esperada":val.get("fecha_esperada"),
-                    "fecha_de_entrega":val.get("fecha_entrega")
+                    "Codigo del Pedido":val.get("codigo_pedido"),
+                    "Codigo del Cliente":val.get("codigo_cliente"),
+                    "Fecha Esperada":val.get("fecha_esperada"),
+                    "Fecha de Entrega":val.get("fecha_entrega")
                 })
     return pedidosEntregado
 
@@ -48,10 +49,10 @@ def getAllPedidosEntregadosdosdiasantesdeTiempo():
             diff=end.date()-star.date()
             if diff.days>=2:
                 pedidosEntregado.append({
-                    "codigo_de_pedido":val.get("codigo_pedido"),
-                    "codigo_de_cliente":val.get("codigo_cliente"),
-                    "fecha_esperada":val.get("fecha_esperada"),
-                    "fecha_de_entrega":val.get("fecha_entrega")
+                    "Codigo del pedido":val.get("codigo_pedido"),
+                    "Codigo del Cliente":val.get("codigo_cliente"),
+                    "Fecha esperada":val.get("fecha_esperada"),
+                    "Fecha de Entrega":val.get("fecha_entrega")
                 })
     return pedidosEntregado
 
@@ -65,13 +66,13 @@ def getAllPedidosRechazados2009():
             fechaconvertida=datetime.strptime(fechapedido,"%Y-%m-%d")
             if fechaconvertida.year==2009:
                 pedidosEntregado.append({
-                    "codigo_pedido":val.get("codigo_pedido"),
-                    "fecha_pedido":val.get("fecha_pedido"),
-                    "fecha_esperada":val.get("fecha_esperada"),
-                    "fecha_entrega":val.get("fecha_entrega"),
-                    "estado":val.get("estado"),
-                    "comentarios":val.get("comentario"),
-                    "codigo_cliente":val.get("codigo_cliente")
+                    "Cod. pedido":val.get("codigo_pedido"),
+                    "Fec. pedido":val.get("fecha_pedido"),
+                    "Fec. esperada":val.get("fecha_esperada"),
+                    "Fec. entrega":val.get("fecha_entrega"),
+                    "Estado":val.get("estado"),
+                    #"Comentarios":val.get("comentario"),
+                    "Cod. cliente":val.get("codigo_cliente")
                 })
     return pedidosEntregado
 
@@ -85,15 +86,40 @@ def getAllPedidosEntregadosdelmesdeenero():
             fechaconvertida=datetime.strptime(fechaEntrega,"%Y-%m-%d")
             if fechaconvertida.month==1:
                 pedidosEntregado.append({
-                    "codigo_pedido":val.get("codigo_pedido"),
-                    "fecha_pedido":val.get("fecha_pedido"),
-                    "fecha_esperada":val.get("fecha_esperada"),
-                    "fecha_entrega":val.get("fecha_entrega"),
-                    "estado":val.get("estado"),
-                    "comentarios":val.get("comentario"),
-                    "codigo_cliente":val.get("codigo_cliente")
+                    "Codigo pedido":val.get("codigo_pedido"),
+                    "Fecha pedido":val.get("fecha_pedido"),
+                    "Fecha esperada":val.get("fecha_esperada"),
+                    "Fecha entrega":val.get("fecha_entrega"),
+                    "Estado":val.get("estado"),
+                    "Comentarios":val.get("comentario"),
+                    "Codigo cliente":val.get("codigo_cliente")
                 })
     return pedidosEntregado
 
+def menu():
+    print(""" 
 
-                
+                                 Reporte de Pedidios
+          1.Listado de los estados por los que puede pasar un pedido.
+          2.Listado con el codigo de pedido, codigo de cliente,fecha esperada y fecha de entrega 
+           de los pedidosentregados a tiempos.
+          3. Listado con el codigo de pedido, codigo de cliente, fecha esperada y fecha de entrega
+           de los pedidos cuya fecha de entrega ha sido al menos dos dias de la fecha esperada.
+          4. Listado de todos los pedidos que fueron rechazados en 2009.
+          5. listado de todos los pedidos que han sido entregados en el mes de enero de cualquier año.
+""")
+    opcion=int(input("Ingrese el numero de la opción que desea observar : "))
+    
+    print()
+    if opcion==1:
+        print(tabulate(getAllDiferentesEstados(),headers="keys",tablefmt="github"))
+    elif opcion==2:
+        print(tabulate(getAllPedidosEntregadosAtrasadosdeTiempo(),headers="keys",tablefmt="github"))
+    elif opcion==3:
+        print(tabulate(getAllPedidosEntregadosdosdiasantesdeTiempo(),headers="keys",tablefmt="github"))
+    elif opcion==4:
+        print(tabulate(getAllPedidosRechazados2009(),headers="keys",tablefmt="grid", colalign=("left",)))
+    elif opcion==5:
+        print(tabulate(getAllPedidosEntregadosdelmesdeenero(),headers="keys",tablefmt="github"))
+
+print()

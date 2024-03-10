@@ -3,7 +3,7 @@ from tabulate import tabulate
 #Devuelve un listado con todos los nombres de los clientes españoles 
 
 
-def Nombres(pais): 
+def Nombres(): 
     Nombres=[]
     for val in cl.clientes:
         if (val.get("pais")=="Spain"):
@@ -23,7 +23,7 @@ def menu():
     print()
     opcion=int(input("Seleccione una opcion : "))
     if opcion==1:
-        pais="Spain"
+        #pais="Spain"
         print()
-        print(tabulate(Nombres(pais), headers="keys", tablefmt="github"))
+        print(tabulate(Nombres(), headers="keys", tablefmt="github"))
         # print(Nombres(pais))
