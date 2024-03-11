@@ -42,8 +42,8 @@ def getAllNombreproductosygamamayorutilidad():
                 
     return listaresultados
 
-# Un listado con los  clientes que mas han comprado
-def tresclientesquemascompran():
+# Un listado con los clientes que mas han comprado
+def clientesquemascompran():
     totaldecomprasporcliente={}
     for val in pa.pago:
         CodigoCliente=val.get("codigo_cliente")
@@ -54,10 +54,15 @@ def tresclientesquemascompran():
         else:
             totaldecomprasporcliente[CodigoCliente]=total
    
-    clientes_ordenados=sorted(totaldecomprasporcliente, key=totaldecomprasporcliente.get, reverse=True)
-    tres_clientes=clientes_ordenados[:3]
-    
-    return tres_clientes
+        clientes_ordenados=sorted(totaldecomprasporcliente, key=totaldecomprasporcliente.get, reverse=True)
+    listaresultado=[]
+    for clientes in clientes_ordenados:
+            listaresultado.append({
+                "Codigo":clientes,
+                "ventas":totaldecomprasporcliente[clientes]
+            })
+     
+    return listaresultado
 #Devuelva una lista  con todos los productos que pertecen a la gama ornamentales y que tienen mas
 # de 100 unidades en stock el listado debera estar organizado por su precio de venta,
 # mostrando primer lugar los de mayor precio
@@ -82,5 +87,5 @@ def menu():
         print(tabulate(getAllNombreproductosygamamayorutilidad(),headers="keys",tablefmt="github"))
 
     elif opcion==3:
-        print(tresclientesquemascompran())
+        print(clientesquemascompran())
 
