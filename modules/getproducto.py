@@ -42,32 +42,28 @@ def getAllNombreproductosygamamayorutilidad():
                 
     return listaresultados
 
-# Un listado con los 3 clientes que mas han comprado
+# Un listado con los  clientes que mas han comprado
 def tresclientesquemascompran():
     totaldecomprasporcliente={}
     for val in pa.pago:
         CodigoCliente=val.get("codigo_cliente")
         total=val.get("total")
+        #listay=[]
         if CodigoCliente in totaldecomprasporcliente:
             totaldecomprasporcliente[CodigoCliente]=totaldecomprasporcliente[CodigoCliente]+total
         else:
             totaldecomprasporcliente[CodigoCliente]=total
-
+   
     clientes_ordenados=sorted(totaldecomprasporcliente, key=totaldecomprasporcliente.get, reverse=True)
     tres_clientes=clientes_ordenados[:3]
-    return tres_clientes
-
-        
-
-
     
-
-
-
-             
-
-
-
+    return tres_clientes
+#Devuelva una lista  con todos los productos que pertecen a la gama ornamentales y que tienen mas
+# de 100 unidades en stock el listado debera estar organizado por su precio de venta,
+# mostrando primer lugar los de mayor precio
+#def getAllStocksPriceGama(gama,stock):
+#    def defgamaStock(val):
+   
 
 def menu():
     print("""   
@@ -75,6 +71,7 @@ def menu():
           
           1.Lista de los productos con un stock igual o menor a 15 unidades
           2.Lista de productos que mas utilidad generan
+          3.Lista con los 3 clientes que mas han comprado
  """)
     print()
     opcion=int(input("Digite el numero de la opcion seleccionada : "))
