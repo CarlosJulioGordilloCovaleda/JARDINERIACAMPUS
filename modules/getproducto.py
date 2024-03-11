@@ -48,18 +48,21 @@ def clientesquemascompran():
     for val in pa.pago:
         CodigoCliente=val.get("codigo_cliente")
         total=val.get("total")
-        #listay=[]
         if CodigoCliente in totaldecomprasporcliente:
             totaldecomprasporcliente[CodigoCliente]=totaldecomprasporcliente[CodigoCliente]+total
         else:
             totaldecomprasporcliente[CodigoCliente]=total
-   
         clientes_ordenados=sorted(totaldecomprasporcliente, key=totaldecomprasporcliente.get, reverse=True)
+        clientesordenados3=clientes_ordenados[:5]
     listaresultado=[]
-    for clientes in clientes_ordenados:
-            listaresultado.append({
-                "Codigo":clientes,
-                "ventas":totaldecomprasporcliente[clientes]
+    for clientes in clientesordenados3:
+            for cliente in cli.clientes:
+                if clientes==cliente.get("codigo_cliente"):
+                    listaresultado.append({
+                        "Codigo":clientes,
+                        "Nombre":cliente.get("nombre_cliente"),
+                        "ventas (Dolares)":totaldecomprasporcliente[clientes]
+                        
             })
      
     return listaresultado
@@ -76,10 +79,11 @@ def menu():
           
           1.Lista de los productos con un stock igual o menor a 15 unidades
           2.Lista de productos que mas utilidad generan
-          3.Lista con los 3 clientes que mas han comprado
+          3.TOP 5 MEJORES CLIENTES
  """)
     print()
     opcion=int(input("Digite el numero de la opcion seleccionada : "))
+    print()
     if opcion==1:
         print(tabulate(getAllNombreyCodigoproductostock50menoss(),headers="keys",tablefmt="github"))
     
@@ -87,5 +91,5 @@ def menu():
         print(tabulate(getAllNombreproductosygamamayorutilidad(),headers="keys",tablefmt="github"))
 
     elif opcion==3:
-        print(clientesquemascompran())
+        print(tabulate(clientesquemascompran(),headers="keys",tablefmt="github"))
 
