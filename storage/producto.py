@@ -3,7 +3,7 @@ producto = [
         "codigo_producto": "11679",
         "nombre": "Sierra de Poda 400MM",
         "gama": "Herramientas",
-        "dimensiones": "0,258",
+        "dimensiones": "0,258", 
         "proveedor": "HiperGarden Tools",
         "descripcion": "Gracias a la poda se consigue manipular un poco la naturaleza, dándole la forma que más nos guste. Este trabajo básico de jardinería también facilita que las plantas crezcan de un modo más equilibrado, y que las flores y los frutos vuelvan cada año con regularidad. Lo mejor es dar forma cuando los ejemplares son jóvenes, de modo que exijan pocos cuidados cuando sean adultos. Además de saber cuándo y cómo hay que podar, tener unas herramientas adecuadas para esta labor es también de vital importancia.",
         "cantidad_en_stock": 15,
