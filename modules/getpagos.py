@@ -1,6 +1,7 @@
 from datetime import datetime
 import storage.pago as pg
 from tabulate import tabulate
+
 #Devuelve un listado con el codigo de cliente de aquello clientes
 #que realizaron algun pago en 2008 tenga en cuenta que debera
 #Eliminaraquellos codigos de cliente que aparezcan repetidos

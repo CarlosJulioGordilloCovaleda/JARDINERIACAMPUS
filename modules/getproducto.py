@@ -1,4 +1,6 @@
 import storage.producto as po
+import storage.pago as pa
+import storage.cliente as cli
 from tabulate import tabulate
 
 # Una lista que me de el nombre del producto y el codigo y la cantidad que aun hay, de todos los productos que tenga
@@ -40,6 +42,28 @@ def getAllNombreproductosygamamayorutilidad():
                 
     return listaresultados
 
+# Un listado con los 3 clientes que mas han comprado
+def tresclientesquemascompran():
+    totaldecomprasporcliente={}
+    for val in pa.pago:
+        CodigoCliente=val.get("codigo_cliente")
+        total=val.get("total")
+        if CodigoCliente in totaldecomprasporcliente:
+            totaldecomprasporcliente[CodigoCliente]=totaldecomprasporcliente[CodigoCliente]+total
+        else:
+            totaldecomprasporcliente[CodigoCliente]=total
+
+    clientes_ordenados=sorted(totaldecomprasporcliente, key=totaldecomprasporcliente.get, reverse=True)
+    tres_clientes=clientes_ordenados[:3]
+    return tres_clientes
+
+        
+
+
+    
+
+
+
              
 
 
@@ -60,4 +84,6 @@ def menu():
     elif opcion==2:
         print(tabulate(getAllNombreproductosygamamayorutilidad(),headers="keys",tablefmt="github"))
 
+    elif opcion==3:
+        print(tresclientesquemascompran())
 
