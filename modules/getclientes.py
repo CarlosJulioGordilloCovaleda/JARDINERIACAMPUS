@@ -38,21 +38,18 @@ def getAllNombreClientesyNombreyApellidoEmpleados():
             "Nombre_Cliente":val.get("nombre_cliente"),
             "Codigo_Cliente":val.get("codigo_empleado_rep_ventas")
         })
-        listresultado=[]
+        listaresultado=[]
     for cliente in resultado:
         for val2 in em.empleados:
             if cliente.get("Codigo_Cliente")==val2.get("codigo_empleado"):
-                listresultado.append({
+                listaresultado.append({
                     "Nombre Cliente":cliente.get("Nombre_Cliente"),
                     "Datos del Representante Venta":(f'{val2.get("nombre")} {val2.get("apellido1")}'),
                     "Codigo de Empleado":cliente.get("Codigo_Cliente")
 
                 })
-
-    
-    return listresultado
-        
-
+    return listaresultado
+# Muestra el nombre de los clientes que hayan realizado pagos juntos con el nombre de su representante de ventas
 
 
 def menu():

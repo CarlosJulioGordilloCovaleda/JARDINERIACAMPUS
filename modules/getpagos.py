@@ -1,6 +1,8 @@
 from datetime import datetime
 import storage.pago as pg
 from tabulate import tabulate
+import storage.cliente as cl
+import storage.empleado as em
 
 #Devuelve un listado con el codigo de cliente de aquello clientes
 #que realizaron algun pago en 2008 tenga en cuenta que debera
@@ -36,7 +38,56 @@ def getAllPagos2008Paypal():
     pagosRealizados.sort(key=lambda x: x['total'], reverse=True)
     return pagosRealizados
 
+def getAllNombreClientePagoRepVentas():
+    ListaClientespagados=set()
+    for val in pg.pago:
+        ListaClientespagados.add(
+            val.get("codigo_cliente"),
+        )
+        ListaClientespagado=[{"Codigo del Cliente":code} for code in ListaClientespagados]
+    lista2=[]
+    for cliente in ListaClientespagado:
+        for val2 in cl.clientes:
+            if cliente.get("Codigo del Cliente")==val2.get("codigo_cliente"):
+                lista2.append({
+                    "Nombre del Cliente":val2.get("nombre_cliente"),
+                    "Codigo del Vendedor":val2.get("codigo_empleado_rep_ventas")
+                })
+    listadef=[]
+    for val3 in lista2:
+        for val4 in em.empleados:
+            if val3.get("Codigo del Vendedor")==val4.get("codigo_empleado"):
+                listadef.append({
+                    "Nombre del cliente":val3.get("Nombre del Cliente"),
+                    "Nombre del representante de ventas":(f'{val4.get("nombre")} {val4.get("apellido1")}'),
+                })
+    return listadef
+def getAllNombreClientequenohanpago():
+    ListaClientespagados=set()
+    for val in pg.pago:
+        ListaClientespagados.add(
+            val.get("codigo_cliente"),
+        )
+        ListaClientespagado=[{"Codigo del Cliente":code} for code in ListaClientespagados]
+    lista2=[]
+    for cliente in ListaClientespagado:
+        for val2 in cl.clientes:
+            if cliente.get("Codigo del Cliente")!=val2.get("codigo_cliente"):
+                lista2.append({
+                    "Nombre del Cliente":val2.get("nombre_cliente"),
+                    "Codigo del Vendedor":val2.get("codigo_empleado_rep_ventas")
+                })
+    listadef=[]
+    for val3 in lista2:
+        for val4 in em.empleados:
+            if val3.get("Codigo del Vendedor")==val4.get("codigo_empleado"):
+                listadef.append({
+                    "Nombre del cliente":val3.get("Nombre del Cliente"),
+                    "Nombre del representante de ventas":(f'{val4.get("nombre")} {val4.get("apellido1")}'),
+                })
+    return listadef
 def menu():
+
 
     print(""" 
             
@@ -44,6 +95,7 @@ def menu():
           
           1.listado con el codigo de cliente que realizaron algun pago en 2008 
           2.listado de todos los pagos que se realizaron en el año 2008  mediante PayPal de mayor a menor
+          3.Ensayo
 
  """)
     
@@ -52,5 +104,8 @@ def menu():
         print(tabulate(getCodigosClientes2008(),headers="keys",tablefmt="github"))
     elif opcion==2:
         print(tabulate(getAllPagos2008Paypal(),headers="keys",tablefmt="github"))
-        
+    elif opcion==3:
+        print(tabulate(getAllNombreClientePagoRepVentas(),headers="keys",tablefmt="github"))
+    elif opcion==4:
+        print(tabulate(getAllNombreClientequenohanpago(),headers="keys",tablefmt="github"))
 
