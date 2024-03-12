@@ -71,7 +71,14 @@ def clientesquemascompran():
 # mostrando primer lugar los de mayor precio
 #def getAllStocksPriceGama(gama,stock):
 #    def defgamaStock(val):
-   
+
+def getAllStockPriceGamma(gama,stock):
+    condiciones=[]
+    for val in po.producto:
+        if(val.get("gama") == gama and val.get("cantidad_en_stock")>stock):
+            condiciones.append(val)
+    def price(val):
+        return val.get("precio_venta")
 
 def menu():
     print("""   
