@@ -1,5 +1,5 @@
 import storage.producto as po
-import storage.pago as pa
+#import storage.pago as pa
 import storage.cliente as cli
 from tabulate import tabulate
 

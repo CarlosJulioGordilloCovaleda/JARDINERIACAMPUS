@@ -1,16 +1,21 @@
 from datetime import datetime
-import storage.pago as pg
 from tabulate import tabulate
 import storage.cliente as cl
 import storage.empleado as em
+import requests
 
+#Remote: http://172.16.104.20:5019 servidos
+def getAllData():
+    peticion = requests.get("http://172.16.104.20:5019/")
+    data = peticion.json()
+    return data
 #Devuelve un listado con el codigo de cliente de aquello clientes
 #que realizaron algun pago en 2008 tenga en cuenta que debera
 #Eliminaraquellos codigos de cliente que aparezcan repetidos
 
 def getCodigosClientes2008():
     CodigosClientes2008=set()
-    for val in pg.pago:
+    for val in getAllData():
         fechaPago=(val.get("fecha_pago"))
         if fechaPago!=None:
             fechaPagoConvertida=datetime.strptime(fechaPago,"%Y-%m-%d")
@@ -23,7 +28,7 @@ def getCodigosClientes2008():
 
 def getAllPagos2008Paypal():
     pagosRealizados=[]
-    for val in pg.pago:
+    for val in getAllData():
         fechaPago=val.get("fecha_pago")
         if val.get("forma_pago")=="PayPal" and val.get("fecha_pago")!=None:
             fechaConverida=datetime.strptime(fechaPago,"%Y-%m-%d") 
@@ -40,7 +45,7 @@ def getAllPagos2008Paypal():
 
 def getAllNombreClientePagoRepVentas():
     ListaClientespagados=set()
-    for val in pg.pago:
+    for val in getAllData():
         ListaClientespagados.add(
             val.get("codigo_cliente"),
         )
@@ -64,7 +69,7 @@ def getAllNombreClientePagoRepVentas():
     return listadef
 def getAllNombreClientequenohanpago():
     ListaClientespagados=set()
-    for val in pg.pago:
+    for val in getAllData():
         ListaClientespagados.add(
             val.get("codigo_cliente"),
         )
