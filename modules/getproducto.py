@@ -21,6 +21,18 @@ def getAllDataClientes():
     data=peticion.json()
     return data
 
+# Remote: ttp://172.16.104.45:5024 Pedido
+def allGetDataPedido():
+    peticion=requests.get("http://172.16.104.45:5024")
+    data=peticion.json()
+    return data
+# Remote http://172.16.104.45:5023 Detalle pedido
+
+def allGetDataDetallepedido():
+    peticion=requests.get("http://172.16.104.45:5023")
+    data=peticion.json()
+    return data
+
 
 # Una lista que me de el nombre del producto y el codigo y la cantidad que aun hay, de todos los productos que tenga
 # un stock igual o inferior a 15 unidades
