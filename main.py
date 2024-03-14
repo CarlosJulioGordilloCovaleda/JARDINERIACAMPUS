@@ -6,6 +6,7 @@ import modules.getpedidos as pedidos
 import modules.getpagos as pagos
 import modules.getoficina as oficina
 import modules.getproducto as producto
+import modules.postProducto as PosP
 
 print()
 
@@ -36,6 +37,8 @@ if(__name__=="__main__"):
             pedidos.menu()
         elif op == 6:
             producto.menu()
+        elif op==7:
+            PosP.menu()
         elif op == 0:
             break
         

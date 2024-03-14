@@ -3,9 +3,9 @@ from datetime import datetime
 from tabulate import tabulate
 import requests
 
-# Remote: http://172.16.104.20:5020 
+# Remote: http://172.16.104.20:5020 http://172.16.100.132:5020
 def allGetData():
-    peticion=requests.get("http://172.16.104.20:5020/")
+    peticion=requests.get("http://172.16.100.132:5020")
     data=peticion.json()
     return data
 
@@ -14,7 +14,7 @@ def allGetData():
 def getAllDiferentesEstados():
     DiferentesEstados=set()
     for val in allGetData():
-        if val.get("estado") != 0:
+        if val.get("estado") != None:
             DiferentesEstados.add(val.get("estado"))
     lista_DiferentesEstados=[{"Estado del pedido": vall} for vall in DiferentesEstados]
     return lista_DiferentesEstados
@@ -25,7 +25,7 @@ def getAllDiferentesEstados():
 def getAllPedidosEntregadosAtrasadosdeTiempo():
     pedidosEntregado=[]
     for val in allGetData():
-        if val.get("estado")== "Entregado" and val.get("fecha_entrega") is 0:
+        if val.get("estado")== "Entregado" and val.get("fecha_entrega") is None:
             val["fecha_entrega"]=val.get("fecha_esperada")
         if val.get("estado")=="Entregado":
             date_1=(val.get("fecha_entrega"))
@@ -48,7 +48,7 @@ def getAllPedidosEntregadosAtrasadosdeTiempo():
 def getAllPedidosEntregadosdosdiasantesdeTiempo():
     pedidosEntregado=[]
     for val in allGetData():
-        if val.get("estado")== "Entregado" and val.get("fecha_entrega") is 0:
+        if val.get("estado")== "Entregado" and val.get("fecha_entrega") is None:
             val["fecha_entrega"]=val.get("fecha_esperada")
         if val.get("estado")=="Entregado":
             date_1=(val.get("fecha_entrega"))
@@ -71,7 +71,7 @@ def getAllPedidosRechazados2009():
     pedidosEntregado=[]
     for val in allGetData():
         fechapedido=val.get("fecha_pedido")
-        if val.get("estado")== "Rechazado" and val.get("fecha_pedido")!=0:
+        if val.get("estado")== "Rechazado" and val.get("fecha_pedido")!=None:
             fechaconvertida=datetime.strptime(fechapedido,"%Y-%m-%d")
             if fechaconvertida.year==2009:
                 pedidosEntregado.append({
@@ -91,7 +91,7 @@ def getAllPedidosEntregadosdelmesdeenero():
     pedidosEntregado=[]
     for val in allGetData():
         fechaEntrega=val.get("fecha_entrega")
-        if val.get("estado")=="Entregado" and val.get("fecha_entrega")!=0:
+        if val.get("estado")=="Entregado" and val.get("fecha_entrega")!=None:
             fechaconvertida=datetime.strptime(fechaEntrega,"%Y-%m-%d")
             if fechaconvertida.month==1:
                 pedidosEntregado.append({
@@ -108,7 +108,7 @@ def getAllPedidosEntregadosdelmesdeenero():
 def menu():
     print(""" 
 
-                                 Reporte de Pedidios
+                                 Reporte de Pedidos
           1.Listado de los estados por los que puede pasar un pedido.
           2.Listado con el codigo de pedido, codigo de cliente,fecha esperada y fecha de entrega 
            de los pedidosentregados a tiempos.

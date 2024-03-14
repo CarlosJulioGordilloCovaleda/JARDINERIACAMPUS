@@ -1,14 +1,19 @@
-import storage.producto as po
-#import storage.pago as pa
+
 import storage.cliente as cli
 from tabulate import tabulate
+import requests
+#Remote: http://172.16.100.132:5021 Productos
+def allGetData():
+    peticion=requests.get("http://172.16.100.132:5021")
+    data=peticion.json()
+    return data
 
 # Una lista que me de el nombre del producto y el codigo y la cantidad que aun hay, de todos los productos que tenga
 # un stock igual o inferior a 15 unidades
 
 def getAllNombreyCodigoproductostock50menoss():
     listarespuesta=[]
-    for val in po.producto:
+    for val in allGetData():
         if val.get("cantidad_en_stock")!=None:
             if val.get("cantidad_en_stock")<=15:
                 listarespuesta.append({
@@ -21,7 +26,7 @@ def getAllNombreyCodigoproductostock50menoss():
 def getAllNombreproductosygamamayorutilidad():
     listaresultados=[]
     mayor_utilidad=0
-    for val in po.producto:
+    for val in allGetData():
         if val.get("precio_venta")!=None and val.get("precio_proveedor")!=None:
             preciocompra=val.get("precio_proveedor")
             precioventa=val.get("precio_venta")
@@ -74,7 +79,7 @@ def clientesquemascompran():
 
 def getAllStockPriceGamma(gama,stock):
     condiciones=[]
-    for val in po.producto:
+    for val in allGetData():
         if(val.get("gama") == gama and val.get("cantidad_en_stock")>stock):
             condiciones.append(val)
     def price(val):
