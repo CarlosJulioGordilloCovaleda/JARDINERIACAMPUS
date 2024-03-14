@@ -1,19 +1,33 @@
 
-import storage.cliente as cli
+
 from tabulate import tabulate
 import requests
+
 #Remote: http://172.16.100.132:5021 Productos
-def allGetData():
-    peticion=requests.get("http://172.16.100.132:5021")
+def allGetDataProductos():
+    peticion=requests.get("http://172.16.104.45:5021/")
     data=peticion.json()
     return data
+
+#Remote: http://172.16.104.20:5019 Servidos Pagos
+def getAllDataPagos():
+    peticion = requests.get("http://172.16.104.45:5019")
+    data = peticion.json()
+    return data
+
+#http://172.16.104.45:5022  Clientes 
+def getAllDataClientes():
+    peticion=requests.get("http://172.16.104.45:5022")
+    data=peticion.json()
+    return data
+
 
 # Una lista que me de el nombre del producto y el codigo y la cantidad que aun hay, de todos los productos que tenga
 # un stock igual o inferior a 15 unidades
 
 def getAllNombreyCodigoproductostock50menoss():
     listarespuesta=[]
-    for val in allGetData():
+    for val in allGetDataProductos():
         if val.get("cantidad_en_stock")!=None:
             if val.get("cantidad_en_stock")<=15:
                 listarespuesta.append({
@@ -26,7 +40,7 @@ def getAllNombreyCodigoproductostock50menoss():
 def getAllNombreproductosygamamayorutilidad():
     listaresultados=[]
     mayor_utilidad=0
-    for val in allGetData():
+    for val in allGetDataProductos():
         if val.get("precio_venta")!=None and val.get("precio_proveedor")!=None:
             preciocompra=val.get("precio_proveedor")
             precioventa=val.get("precio_venta")
@@ -50,7 +64,7 @@ def getAllNombreproductosygamamayorutilidad():
 # Un listado con los clientes que mas han comprado
 def clientesquemascompran():
     totaldecomprasporcliente={}
-    for val in pa.pago:
+    for val in getAllDataPagos():
         CodigoCliente=val.get("codigo_cliente")
         total=val.get("total")
         if CodigoCliente in totaldecomprasporcliente:
@@ -61,7 +75,7 @@ def clientesquemascompran():
         clientesordenados3=clientes_ordenados[:5]
     listaresultado=[]
     for clientes in clientesordenados3:
-            for cliente in cli.clientes:
+            for cliente in getAllDataClientes():
                 if clientes==cliente.get("codigo_cliente"):
                     listaresultado.append({
                         "Codigo":clientes,
@@ -74,12 +88,11 @@ def clientesquemascompran():
 #Devuelva una lista  con todos los productos que pertecen a la gama ornamentales y que tienen mas
 # de 100 unidades en stock el listado debera estar organizado por su precio de venta,
 # mostrando primer lugar los de mayor precio
-#def getAllStocksPriceGama(gama,stock):
-#    def defgamaStock(val):
+
 
 def getAllStockPriceGamma(gama,stock):
     condiciones=[]
-    for val in allGetData():
+    for val in allGetDataProductos():
         if(val.get("gama") == gama and val.get("cantidad_en_stock")>stock):
             condiciones.append(val)
     def price(val):

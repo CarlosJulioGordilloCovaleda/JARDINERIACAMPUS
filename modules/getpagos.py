@@ -1,21 +1,29 @@
 from datetime import datetime
 from tabulate import tabulate
-import storage.cliente as cl
 import storage.empleado as em
 import requests
 
-#Remote: http://172.16.104.20:5019 servidos
-def getAllData():
-    peticion = requests.get("http://172.16.104.20:5019/")
+#Remote: http://172.16.104.20:5019 Servidos Pagos
+def getAllDataPagos():
+    peticion = requests.get("http://172.16.104.45:5019")
     data = peticion.json()
     return data
+#http://172.16.104.45:5022 Direcciòn Clientes
+def getAllDataClientes():
+    peticion=requests.get("http://172.16.104.45:5022")
+    data=peticion.json()
+    return data
+
+
+
+
 #Devuelve un listado con el codigo de cliente de aquello clientes
 #que realizaron algun pago en 2008 tenga en cuenta que debera
 #Eliminaraquellos codigos de cliente que aparezcan repetidos
 
 def getCodigosClientes2008():
     CodigosClientes2008=set()
-    for val in getAllData():
+    for val in getAllDataPagos():
         fechaPago=(val.get("fecha_pago"))
         if fechaPago!=None:
             fechaPagoConvertida=datetime.strptime(fechaPago,"%Y-%m-%d")
@@ -28,7 +36,7 @@ def getCodigosClientes2008():
 
 def getAllPagos2008Paypal():
     pagosRealizados=[]
-    for val in getAllData():
+    for val in getAllDataPagos():
         fechaPago=val.get("fecha_pago")
         if val.get("forma_pago")=="PayPal" and val.get("fecha_pago")!=None:
             fechaConverida=datetime.strptime(fechaPago,"%Y-%m-%d") 
@@ -45,14 +53,14 @@ def getAllPagos2008Paypal():
 
 def getAllNombreClientePagoRepVentas():
     ListaClientespagados=set()
-    for val in getAllData():
+    for val in getAllDataClientes():
         ListaClientespagados.add(
             val.get("codigo_cliente"),
         )
         ListaClientespagado=[{"Codigo del Cliente":code} for code in ListaClientespagados]
     lista2=[]
     for cliente in ListaClientespagado:
-        for val2 in cl.clientes:
+        for val2 in getAllDataClientes():
             if cliente.get("Codigo del Cliente")==val2.get("codigo_cliente"):
                 lista2.append({
                     "Nombre del Cliente":val2.get("nombre_cliente"),
@@ -69,14 +77,14 @@ def getAllNombreClientePagoRepVentas():
     return listadef
 def getAllNombreClientequenohanpago():
     ListaClientespagados=set()
-    for val in getAllData():
+    for val in getAllDataClientes():
         ListaClientespagados.add(
             val.get("codigo_cliente"),
         )
         ListaClientespagado=[{"Codigo del Cliente":code} for code in ListaClientespagados]
     lista2=[]
     for cliente in ListaClientespagado:
-        for val2 in cl.clientes:
+        for val2 in getAllDataClientes():
             if cliente.get("Codigo del Cliente")!=val2.get("codigo_cliente"):
                 lista2.append({
                     "Nombre del Cliente":val2.get("nombre_cliente"),

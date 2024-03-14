@@ -1,12 +1,19 @@
-import storage.cliente as cl
+
 from tabulate import tabulate
 import storage.empleado as em
+import requests
+
+#http://172.16.104.45:5022 Direcciòn Clientes
+def getAllDataClientes():
+    peticion=requests.get("http://172.16.104.45:5022")
+    data=peticion.json()
+    return data
 # Devuelve un listado con todos los nombres de los clientes españoles
 
 
 def Nombres():
     Nombres = []
-    for val in cl.clientes:
+    for val in getAllDataClientes():
         if (val.get("pais") == "Spain"):
             Nombres.append({
                 "Nombre del cliente": val.get("nombre_cliente")
@@ -19,7 +26,7 @@ def Nombres():
 def getAllCliMadridRepreVen():
     listaresultado=[]
     
-    for val in cl.clientes:
+    for val in getAllDataClientes():
         if val.get("ciudad")=="Madrid":
             if val.get("codigo_empleado_rep_ventas")==11 or val.get("codigo_empleado_rep_ventas")==30:  
                 listaresultado.append({
@@ -33,7 +40,7 @@ def getAllCliMadridRepreVen():
 # Obten un listado con el nombre de cada cliente y el nombre y el apellido de su representante de ventas.
 def getAllNombreClientesyNombreyApellidoEmpleados():
     resultado=[]
-    for val in cl.clientes:
+    for val in getAllDataClientes():
         resultado.append({
             "Nombre_Cliente":val.get("nombre_cliente"),
             "Codigo_Cliente":val.get("codigo_empleado_rep_ventas")
