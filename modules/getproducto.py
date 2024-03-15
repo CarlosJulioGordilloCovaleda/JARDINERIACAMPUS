@@ -1,4 +1,4 @@
-
+#%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;C:\Users\Carlos Gordillo\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Carlos Gordillo\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts;
 
 from tabulate import tabulate
 import requests
