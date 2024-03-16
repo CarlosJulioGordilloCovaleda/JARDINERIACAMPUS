@@ -1,3 +1,5 @@
+import os
+import re
 import storage.oficina as of
 from tabulate import tabulate
 
@@ -24,17 +26,25 @@ def getAllCiudadytelefonoEspaña():
     return ciudadyTelefonoSpain
 
 def menu():
-    print(""" 
-                     Reporte de Oficinas
+    while True:
+        os.systema("cls")
+        print(""" 
+                     
+                            Reporte de Oficinas
+              
+              
           1. Listado de codigo de oficina y en que ciudad se ubica
           2. Listado de las oficinas ubicadas en España con su numero de telefono y correspondiente ciudad
  """)
-    
-    opcion=int(input(" Ingrese un numero : ")) 
-    if opcion==1:
-        print(tabulate(getAllcodigodeOficinayCiudad(), headers="keys",tablefmt="github"))
-    elif opcion==2:
-        print(tabulate(getAllCiudadytelefonoEspaña(), headers="keys", tablefmt="github"))
+           
+        op = input("Seleccione una de las siguientes opciones ")
+        if (re.match(r'[0-9]+$',op) is not None):
+               op=int(op)
+               if(op >=0 and op<=7):
+                    if op==1:
+                        print(tabulate(getAllcodigodeOficinayCiudad(), headers="keys",tablefmt="github"))
+                    elif op==2:
+                        print(tabulate(getAllCiudadytelefonoEspaña(), headers="keys", tablefmt="github"))
 
 
         

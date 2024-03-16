@@ -1,1 +1,32 @@
-[{"gama": "Herbaceas", "descripcion_texto": "Plantas para jardin decorativas", "descripcion_html": null, "imagen": null}, {"gama": "Herramientas", "descripcion_texto": "Herramientas para todo tipo de acci\u00f3n", "descripcion_html": null, "imagen": null}, {"gama": "Arom\u00e1ticas", "descripcion_texto": "Plantas arom\u00e1ticas", "descripcion_html": null, "imagen": null}, {"gama": "Frutales", "descripcion_texto": "\u00c1rboles peque\u00f1os de producci\u00f3n frutal", "descripcion_html": null, "imagen": null}, {"gama": "Ornamentales", "descripcion_texto": "Plantas vistosas para la decoraci\u00f3n del jard\u00edn", "descripcion_html": null, "imagen": null}, {"codigo_producto": "MT001", "nombre": "Martillo ", "gama": "Ornamentales", "dimensiones": "10", "proveedor": "Cositas ", "descripcion": "Producto muy chevere", "cantidad_en_stock": 15, "precio_venta": 100, "precio_proveedor": 5, "id": 6}, {"codigo_producto": "MT001", "nombre": "Martillo", "gama": "Ornamentales", "dimensiones": "1", "proveedor": "Cositas", "descripcion": "UN", "cantidad_en_stock": 15, "precio_venta": 100, "precio_proveedor": 5, "id": 7}]
+[
+    {
+        "gama": "Herbaceas",
+        "descripcion_texto": "Plantas para jardin decorativas",
+        "descripcion_html": null,
+        "imagen": null
+    },
+    {
+        "gama": "Herramientas",
+        "descripcion_texto": "Herramientas para todo tipo de acci\u00f3n",
+        "descripcion_html": null,
+        "imagen": null
+    },
+    {
+        "gama": "Arom\u00e1ticas",
+        "descripcion_texto": "Plantas arom\u00e1ticas",
+        "descripcion_html": null,
+        "imagen": null
+    },
+    {
+        "gama": "Frutales",
+        "descripcion_texto": "\u00c1rboles peque\u00f1os de producci\u00f3n frutal",
+        "descripcion_html": null,
+        "imagen": null
+    },
+    {
+        "gama": "Ornamentales",
+        "descripcion_texto": "Plantas vistosas para la decoraci\u00f3n del jard\u00edn",
+        "descripcion_html": null,
+        "imagen": null
+    }
+]

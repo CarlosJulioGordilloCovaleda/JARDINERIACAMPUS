@@ -1,13 +1,26 @@
 #%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;C:\Users\Carlos Gordillo\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Carlos Gordillo\AppData\Local\Packages\PythonSoftwareFoundation.Python.3.11_qbz5n2kfra8p0\LocalCache\local-packages\Python311\Scripts;
-
+import re
+import os
 from tabulate import tabulate
 import requests
 
-#Remote: http://172.16.100.132:5021 Productos
+#Remote: http://192.168.1.16:5021 Productos
 def allGetDataProductos():
-    peticion=requests.get("http://172.16.104.45:5021/")
+    peticion=requests.get("http://192.168.1.16:5021")
     data=peticion.json()
     return data
+# Funcion para llamar los Codigos de los productos y compararlos si ya esxisten
+def getProductosCodigo(codigo):
+    for val in allGetDataProductos():
+        if (val.get("codigo_producto"))==codigo:
+            return [val]
+# Funcion para llamar a los nombres de los proveedores
+def getNombresProveedores():
+    conjunto=set()
+    for val in allGetDataProductos():
+        conjunto.add(val.get("proveedor"))
+    listaprovedores=[{"proveedor":code} for code in conjunto]
+    return listaprovedores
 
 #Remote: http://172.16.104.20:5019 Servidos Pagos
 def getAllDataPagos():
@@ -111,22 +124,30 @@ def getAllStockPriceGamma(gama,stock):
         return val.get("precio_venta")
 
 def menu():
-    print("""   
+    while True:
+        os.system("cls")
+        print("""   
                         Reporte Productos
           
-          1.Lista de los productos con un stock igual o menor a 15 unidades
-          2.Lista de productos que mas utilidad generan
-          3.TOP 5 MEJORES CLIENTES
+            1.Lista de los productos con un stock igual o menor a 15 unidades
+            2.Lista de productos que mas utilidad generan
+            3.TOP 5 MEJORES CLIENTES
+            0.Volver
+            
  """)
-    print()
-    opcion=int(input("Digite el numero de la opcion seleccionada : "))
-    print()
-    if opcion==1:
-        print(tabulate(getAllNombreyCodigoproductostock50menoss(),headers="keys",tablefmt="github"))
     
-    elif opcion==2:
-        print(tabulate(getAllNombreproductosygamamayorutilidad(),headers="keys",tablefmt="github"))
+        op = input("Seleccione una de las siguientes opciones ")
+        if (re.match(r'[0-9]+$',op) is not None):
+            op=int(op)
+            if(op >=0 and op<=7):
+                if op==1:
+                    print(tabulate(getAllNombreyCodigoproductostock50menoss(),headers="keys",tablefmt="github"))
+                
+                elif op==2:
+                    print(tabulate(getAllNombreproductosygamamayorutilidad(),headers="keys",tablefmt="github"))
 
-    elif opcion==3:
-        print(tabulate(clientesquemascompran(),headers="keys",tablefmt="github"))
+                elif op==3:
+                    print(tabulate(clientesquemascompran(),headers="keys",tablefmt="github"))
+                elif op==0:
+                    break
 
