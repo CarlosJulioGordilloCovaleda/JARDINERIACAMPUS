@@ -13,8 +13,8 @@ import modules.getproducto as producto
 import modules.postProducto as PosP
 import modules.getgama as gG
 
-##PosP.postProducto()
-print(producto.getNombresProveedores())
+PosP.postProducto()
+#print(producto.getNombresProveedores())
 
 # if(__name__=="__main__"):
 #     while True:

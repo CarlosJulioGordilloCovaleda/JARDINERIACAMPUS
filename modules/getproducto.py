@@ -6,7 +6,7 @@ import requests
 
 #Remote: http://192.168.1.16:5021 Productos
 def allGetDataProductos():
-    peticion=requests.get("http://192.168.1.16:5021")
+    peticion=requests.get("http://192.168.43.214:5021")
     data=peticion.json()
     return data
 # Funcion para llamar los Codigos de los productos y compararlos si ya esxisten
@@ -16,11 +16,11 @@ def getProductosCodigo(codigo):
             return [val]
 # Funcion para llamar a los nombres de los proveedores
 def getNombresProveedores():
-    conjunto=set()
+    proveedores=set()
     for val in allGetDataProductos():
-        conjunto.add(val.get("proveedor"))
-    listaprovedores=[{"proveedor":code} for code in conjunto]
-    return listaprovedores
+        proveedores.add(val.get("proveedor"))
+    proveedores_lista=list(proveedores)
+    return proveedores_lista
 
 #Remote: http://172.16.104.20:5019 Servidos Pagos
 def getAllDataPagos():

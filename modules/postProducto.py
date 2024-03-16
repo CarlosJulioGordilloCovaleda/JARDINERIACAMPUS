@@ -33,6 +33,7 @@ def postProducto():
                     raise Exception("El nombre del producto no cumple con el estandar establecido")
             #"Gama del Producto"
             if(not producto.get("gama")):
+                print("lista de gamas")
                 for i,val in enumerate(gG.getNombresGamma(),start=1):
                     print(f'\t{i} {val}')
                 opcion_seleccionada=(input("Selecciona una gama : "))
@@ -48,14 +49,22 @@ def postProducto():
                 if((re.match(r'^\d+-\d+$',dimensiones)is not None)):#  Expresion regular hace que hay un numero de con cualquier contidad de digitos un guion que los separa y otro numero de cualquier cantidad de digitios
                     dimensiones_espacio=dimensiones.replace('-',' - ') #Replace sirve para que el guion que se agrego en la expresion regular anteior se cambie por un guion con espacios que es tal y como esta en la base de datos esta llave de dimensiones
                     producto["dimensiones"]=dimensiones_espacio
+                else:   
+                    raise Exception ("Las dimensiones ingresadas no cumplen con el estandar establecido")
+            # Proveedores
+            if(not producto.get("proveedores")):
+                print("lista de Proveedores")
+                for i,val in enumerate(gP.getNombresProveedores(),start=1):
+                    print(f'\t{i} {val}')
+                opseleccionada=(input("Ingresa el numero del proveedor: "))
+                if((re.match(r'[1-8]+$',opseleccionada) is not None)):
+                    opseleccionada=int(opseleccionada)
+                    producto["proveedor"]=gP.getNombresProveedores()[opseleccionada-1]
                     break
-            if(not producto.get("proveedor")):
-
-
                 else:
-                   raise Exception ("Las dimensiones ingresadas no cumplen con el estandar establecido")
+                    raise Exception ("El proveedor no se encuentra en la base de datos, debe registrarlo en otra plataforma")
         except Exception as error:
-          print(error)
+            print(error)
     print(producto)
 
         
