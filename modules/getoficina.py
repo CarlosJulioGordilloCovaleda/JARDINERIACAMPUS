@@ -2,7 +2,7 @@ import storage.oficina as of
 from tabulate import tabulate
 
 #Devuelve un listado con el codigo de Oficina y ciudad donde hay oficina
-#343434
+#3
 def getAllcodigodeOficinayCiudad():
     codigoOficinayCiudad=[]
     for val in of.oficina:

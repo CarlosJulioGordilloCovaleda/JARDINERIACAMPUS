@@ -8,7 +8,7 @@ def getAllDataPagos():
     peticion = requests.get("http://172.16.104.45:5019")
     data = peticion.json()
     return data
-#http://172.16.104.45:5022 Direcciòn Clientes
+#http://172.16.104.45:5022  Clientes
 def getAllDataClientes():
     peticion=requests.get("http://172.16.104.45:5022")
     data=peticion.json()

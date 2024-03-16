@@ -2,7 +2,7 @@ import os
 from tabulate import tabulate 
 import json
 import requests
-# ttp://172.16.106.252:5024 storage/gama de productos
+
 def postProducto():
     producto={
         "codigo_producto": input("Ingrese el codigo del producto: "),
@@ -16,10 +16,10 @@ def postProducto():
         "precio_proveedor": int(input("Ingrse el precio del proveedor: "))    
     }
     
-    peticion=requests.post ("http://172.16.106.252:5021",data=json.dumps(producto))
+    peticion=requests.post ("http://192.168.1.16:5021",data=json.dumps(producto))
     res=peticion.json()
     res["Mensaje"] = "Producto Guardado"
-    return[res]
+    return [res]
 
 def menu():
     while True:
