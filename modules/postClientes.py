@@ -1,5 +1,6 @@
 # Este modulo es para agregar nuevos clientes
 import re
+import requests
 import os
 import json
 import modules.getclientes as clientes
@@ -51,10 +52,25 @@ def postClientes():
             if(not cliente.get("linea_direccion1")):
                 clientedirección=input("Ingrese la dirección 1 del cliente : ")
                 cliente["linea_direccion1"]=clientedirección.title()
+            # Dirección # 2
+            if(not cliente.get("linea_direccion2")):
+                clientedirecciónopcional=input("Si el usuario tiene una 2da dirección ingresala sino solo pulsa enter: ")
+                if clientedirecciónopcional.strip(): #  strip() se utiliza para eliminar cualquier espacio en blanco alrededor de la entrada del usuario
+                    cliente["linea_direccion2"]=clientedirecciónopcional.title()
+                else:
+                    cliente["linea_direccion2"]= None
                 break
         except Exception as error:
             print(error) 
     print(cliente)
+    
+    peticion=requests.post ("http://192.168.1.16:5022",data=json.dumps(cliente, indent=4).encode("UTF-8"))
+    res=peticion.json()
+    res["Mensaje"]="Cliente  Guardado"
+    return[res]
+    
+
+
     
     
     

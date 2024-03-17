@@ -115,8 +115,8 @@ def postProducto():
 
     peticion=requests.post ("http://192.168.1.16:5021",data=json.dumps(producto, indent=4).encode("UTF-8")) 
     res=peticion.json()
-    res["Mensaje"] = "Producto Guardado"
-    return [res]
+    res["Mensaje"]="Producto Guardado"
+    return[res]
 
 def menu():
     while True:

@@ -18,7 +18,7 @@ import modules.postClientes as PosCl
 
 #print(cliente.codigosClientes()) #Para probar numeros de clientes
 
-print(PosCl.postClientes())
+PosCl.postClientes()
 #PosP.postProducto() Terminado
 #print(producto.getNombresProveedores())
 
