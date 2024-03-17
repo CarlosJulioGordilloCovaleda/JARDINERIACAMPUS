@@ -103,6 +103,9 @@ def postProducto():
                         raise Exception ("Cuidado estas ingresando un precio menor al de compra")
                 else:
                     raise Exception ("Dato invalido debe ingresar un numero")
+            precio_proveedor = producto.pop("precio_proveedor")
+            if(not producto.get("precio_proveedor")):
+                
         except Exception as error:
             print(error)
     print(producto)
