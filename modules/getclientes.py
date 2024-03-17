@@ -3,11 +3,20 @@ from tabulate import tabulate
 import storage.empleado as em
 import requests
 
-#http://172.16.104.45:5022 Direcciòn Clientes
+#http://192.168.1.16:5022 Direcciòn Clientes
 def getAllDataClientes():
-    peticion=requests.get("http://172.16.104.45:5022")
+    peticion=requests.get("http://192.168.1.16:5022")
     data=peticion.json()
     return data
+# Funcion que devuelva los codigos de los clientes
+
+def codigosClientes():
+    lista=[]
+    for val in getAllDataClientes():
+        lista.append(val.get("codigo_cliente"))
+    return lista
+
+
 # Devuelve un listado con todos los nombres de los clientes españoles
 
 

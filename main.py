@@ -12,8 +12,14 @@ import modules.getoficina as oficina
 import modules.getproducto as producto
 import modules.postProducto as PosP
 import modules.getgama as gG
+import modules.getclientes as cliente
+import modules.postClientes as PosCl
 
-PosP.postProducto()
+
+#print(cliente.codigosClientes()) #Para probar numeros de clientes
+
+print(PosCl.postClientes())
+#PosP.postProducto() Terminado
 #print(producto.getNombresProveedores())
 
 # if(__name__=="__main__"):
