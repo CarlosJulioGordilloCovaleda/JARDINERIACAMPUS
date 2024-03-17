@@ -2819,5 +2819,17 @@
         "cantidad_en_stock": 100,
         "precio_venta": 14,
         "precio_proveedor": 11
+    },
+    {
+        "codigo_producto": "TO-001",
+        "nombre": "Arbol Tomate",
+        "gama": "Frutales",
+        "dimensiones": "22 - 21",
+        "proveedores": "Frutales Talavera S.A",
+        "descripcion": "Arboles para clima semicalido",
+        "cantidad_en_stock": 15,
+        "precio_venta": 20,
+        "precio_proveedor": 12,
+        "id": 277
     }
 ]

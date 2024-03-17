@@ -98,33 +98,25 @@ def postProducto():
                     pVenta=int(pVenta)
                     if pVenta>producto["precio_proveedor"]:
                         producto["precio_venta"]=pVenta
-                        break
+                        
                     else:
                         raise Exception ("Cuidado estas ingresando un precio menor al de compra")
                 else:
                     raise Exception ("Dato invalido debe ingresar un numero")
-            precio_proveedor = producto.pop("precio_proveedor")
-            if(not producto.get("precio_proveedor")):
-                
+            
+            if producto.get("precio_proveedor"): # Esto hace que el precio proveedor aparezca de ultimo tal y como  en el archivo producto.json
+                precio_proveedor = producto.pop("precio_proveedor")
+                producto["precio_proveedor"]=precio_proveedor
+                break
+
         except Exception as error:
             print(error)
     print(producto)
 
-        
-        # "nombre": input("Ingrese el nombre del producto: "),
-        # "gama": input("Ingrese el nombre de la gama"),
-        # "dimensiones": input("Ingrse la dimensiones del producto: "),
-        # "proveedor": input("Ingrse el proveedor del producto: "),
-        # "descripcion": input("Ingrse el descripcion del producto: "),
-        # "cantidad_en_stock": int(input("Ingrse el cantidad en stock: ")),
-        # "precio_venta": int(input("Ingrse el precio de ventas: ")),
-        # "precio_proveedor": int(input("Ingrse el precio del proveedor: "))    
-    #}
-    
-    # peticion=requests.post ("http://192.168.1.16:5021",data=json.dumps(producto, indent=4).enconde("UFT-8")) 
-    # res=peticion.json()
-    # res["Mensaje"] = "Producto Guardado"
-    # return [res]
+    peticion=requests.post ("http://192.168.1.16:5021",data=json.dumps(producto, indent=4).encode("UTF-8")) 
+    res=peticion.json()
+    res["Mensaje"] = "Producto Guardado"
+    return [res]
 
 def menu():
     while True:
