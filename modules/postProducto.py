@@ -12,7 +12,7 @@ def postProducto():
         try:
             #Para agregar el codigo del producto
             if(not producto.get("codigo_producto")):
-                codigo=input(" Ingrese el codigo del producto: ")
+                codigo=input(" Ingrese el codigo del producto en formato (##-XXX): ")
                 if (re.match(r'^[A-Z]{2}-[0-9]{3}$',codigo) is not None):
                     data=gP.getProductosCodigo(codigo)
                     if (data):
@@ -24,8 +24,8 @@ def postProducto():
                     raise Exception("El Codigo del producto no cumple con el estandar establecido")
             # Nombre del Producto
             if(not producto.get("nombre")):
-                nombre=input("Ingrese el nombre del producto: ")
-                if (re.match(r'^([A-Z][a-z]*\s*)+$',nombre)is not None):
+                nombre=input("Ingrese el nombre del producto en formato la primera letra de cada palabra en MAYUSCULA: ")
+                if (re.match(r'^[A-Z][a-z]*(\s[A-Z][a-z]*)*$',nombre)is not None):
                     producto["nombre"]=nombre  
                 else:
                     raise Exception("El nombre del producto no cumple con el estandar establecido")
@@ -39,7 +39,7 @@ def postProducto():
                     opcion_seleccionada=int(opcion_seleccionada)
                     producto["gama"]=gG.getNombresGamma()[opcion_seleccionada-1]
                 else:
-                    raise Exception ("El valor ingresado no corresponde a ninguna de las opciones")
+                    raise Exception ("El valor ingresado no corresponde a ninguna de las opciones, si desea ingresar una nueva gama debe hacerlo en el modulo de gamas")
                 #return nombre_gama_seleccionado    
             #Dimensiones del producto
             if(not producto.get("dimensiones")):
@@ -59,14 +59,14 @@ def postProducto():
                     opseleccionada=int(opseleccionada)
                     producto["proveedores"]=gP.getNombresProveedores()[opseleccionada-1]
                 else:
-                    raise Exception ("El proveedor no se encuentra en la base de datos, debe registrarlo en otra plataforma")
+                    raise Exception ("El proveedor no se encuentra en la base de datos,si desea agregar un nuevo proveedor debe registrarlo en el modulo proveedores")
              # Descripción 
             if(not producto.get("descripcion")):
                 descrip=input(" Ingrese la descrpción del producto debe ser mayor a 10 caracteres : ")
-                if((re.match(r'^[\w\s]{10,}$',descrip) is not None)): # Con esta expresión regular, garantizamos que la descripción tenga al menos tres palabras, y por lo tanto, el total de la descripción debe ser de al menos 15 caracteres (asumiendo que cada palabra está separada por al menos un espacio en blanco)
+                if((re.match(r'^[\w\s]{10,}$',descrip) is not None)): # Con esta expresión regular, garantizamos que la descripción deba ser de al menos 10 caracteres.
                     producto["descripcion"]=descrip.capitalize()
                 else:
-                    raise Exception ("Vuelva a emitar la descripción repita")
+                    raise Exception ("Formato invalido! RECUERDE la descripción debe tener al menos 10 caracteres")
             # Cantidad en stock
             if(not producto.get("cantidad_en_stock")):
                 stock=input("Ingrese las unidades adquiridas : ")
@@ -74,11 +74,35 @@ def postProducto():
                     stock=int(stock)
                     if stock>=0:
                         producto["cantidad_en_stock"]=stock
-                        break
+                        
                     else:
                         raise Exception ("Ingrese un numero Entero")
                 else:
                     raise Exception ("Dato invalido,ingrese un numero entero")
+            # Precio_proveedor
+            if(not producto.get("precio_proveedor")):
+                pProveedor=input("Ingrese el precio de compra : ")
+                if pProveedor.isdigit():
+                    pProveedor=int(pProveedor)
+                    if pProveedor>0:
+                        producto["precio_proveedor"]=pProveedor
+                        
+                    else:
+                        raise Exception ("Ingrese un numero entero mayor a 0")
+                else:
+                    raise Exception ("Dato invalido debe ingresar un numero entero")
+            # Precio_venta
+            if(not producto.get("precio_venta")):
+                pVenta=input("Ingrese el precio de venta : ")
+                if pVenta.isdigit():
+                    pVenta=int(pVenta)
+                    if pVenta>producto["precio_proveedor"]:
+                        producto["precio_venta"]=pVenta
+                        break
+                    else:
+                        raise Exception ("Cuidado estas ingresando un precio menor al de compra")
+                else:
+                    raise Exception ("Dato invalido debe ingresar un numero")
         except Exception as error:
             print(error)
     print(producto)
