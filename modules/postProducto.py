@@ -6,7 +6,7 @@ import requests
 import modules.getproducto as gP
 import modules.getgama as gG
 
-def postProducto():
+def postProducto():    
     producto=dict()
     while True:
         try:
@@ -22,8 +22,6 @@ def postProducto():
                         producto["codigo_producto"]=codigo
                 else:
                     raise Exception("El Codigo del producto no cumple con el estandar establecido")
-          
-          
             # Nombre del Producto
             if(not producto.get("nombre")):
                 nombre=input("Ingrese el nombre del producto: ")
@@ -56,13 +54,31 @@ def postProducto():
                 print("lista de Proveedores")
                 for i,val in enumerate(gP.getNombresProveedores(),start=1):
                     print(f'\t{i} {val}')
-                opseleccionada=(input("Ingresa el numero del proveedor: "))
-                if((re.match(r'[1-8]+$',opseleccionada) is not None)):
+                opseleccionada=input("Ingresa el numero del proveedor: ")
+                if((re.match(r'[1-8]+$',opseleccionada) is not None)): # Expresion regular sirve para seleccionar cualquier  numero del 1 al 8 
                     opseleccionada=int(opseleccionada)
-                    producto["proveedor"]=gP.getNombresProveedores()[opseleccionada-1]
-                    break
+                    producto["proveedores"]=gP.getNombresProveedores()[opseleccionada-1]
                 else:
                     raise Exception ("El proveedor no se encuentra en la base de datos, debe registrarlo en otra plataforma")
+             # Descripción 
+            if(not producto.get("descripcion")):
+                descrip=input(" Ingrese la descrpción del producto debe ser mayor a 10 caracteres : ")
+                if((re.match(r'^[\w\s]{10,}$',descrip) is not None)): # Con esta expresión regular, garantizamos que la descripción tenga al menos tres palabras, y por lo tanto, el total de la descripción debe ser de al menos 15 caracteres (asumiendo que cada palabra está separada por al menos un espacio en blanco)
+                    producto["descripcion"]=descrip.capitalize()
+                else:
+                    raise Exception ("Vuelva a emitar la descripción repita")
+            # Cantidad en stock
+            if(not producto.get("cantidad_en_stock")):
+                stock=input("Ingrese las unidades adquiridas : ")
+                if stock.isdigit():
+                    stock=int(stock)
+                    if stock>=0:
+                        producto["cantidad_en_stock"]=stock
+                        break
+                    else:
+                        raise Exception ("Ingrese un numero Entero")
+                else:
+                    raise Exception ("Dato invalido,ingrese un numero entero")
         except Exception as error:
             print(error)
     print(producto)

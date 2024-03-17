@@ -6,7 +6,7 @@ import requests
 
 #Remote: http://192.168.1.16:5021 Productos
 def allGetDataProductos():
-    peticion=requests.get("http://192.168.43.214:5021")
+    peticion=requests.get("http://192.168.1.16:5021")
     data=peticion.json()
     return data
 # Funcion para llamar los Codigos de los productos y compararlos si ya esxisten
