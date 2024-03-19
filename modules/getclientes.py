@@ -2,6 +2,7 @@
 from tabulate import tabulate
 import storage.empleado as em
 import requests
+import pycountry
 
 #http://192.168.1.16:5022 Direcciòn Clientes
 def getAllDataClientes():
@@ -15,6 +16,14 @@ def codigosClientes():
     for val in getAllDataClientes():
         lista.append(val.get("codigo_cliente"))
     return lista
+# Funcion para obtener una lista de paises 
+def Countries():
+    lista=[]
+    paises=list(pycountry.countries)
+    for pais in paises:
+       lista.append(pais.name) # No utilizo .append por que la es un objetoo. country y no undiccionario
+    return lista
+# Funcion para encontrar la ciudad y codigo postal
 
 
 # Devuelve un listado con todos los nombres de los clientes españoles

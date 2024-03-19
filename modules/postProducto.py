@@ -118,6 +118,28 @@ def postProducto():
     res["Mensaje"]="Producto Guardado"
     return[res]
 
+# Para Borrar Productos
+def deleteProducto(id):
+    data=gP.getProductCodigoID
+    if(len(data)):
+        peticion= requests.delete(f'http://172.16.106.252:5021/productos/{id}')
+        if(peticion.status_code==204):
+            return [{
+                "body":{
+                    "message":"producto eliminado correctamente",
+                    "data":id
+                },
+                "status":peticion.status_code,
+            }]
+        else:
+            return[{
+                "body":{
+                    "message":"producto no encontrado",
+                    "data":id 
+                },
+                "status":400,
+            }]
+
 def menu():
     while True:
         os.system("cls")#Sirve para borrar el menu anteior seleccionado y no se haga un monton de informacion

@@ -6,9 +6,14 @@ import requests
 
 #Remote: http://192.168.1.16:5021 Productos
 def allGetDataProductos():
-    peticion=requests.get("http://192.168.1.16:5021")
+    peticion=requests.get("http://172.16.106.242:5021/productos")
     data=peticion.json()
     return data
+# Funcion que ayuda a eliminar los id
+def getProductCodigoID(codigo):
+    peticion=requests.get(f"http://172.16.106.242:5021/productos{codigo}")
+    return [peticion.json()] if peticion.ok else []
+  
 # Funcion para llamar los Codigos de los productos y compararlos si ya esxisten
 def getProductosCodigo(codigo):
     for val in allGetDataProductos():

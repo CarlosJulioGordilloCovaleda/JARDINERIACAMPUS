@@ -5,6 +5,7 @@ import os
 import json
 import modules.getclientes as clientes
 from tabulate import tabulate
+import pycountry
 
 def postClientes():
     cliente=dict()
@@ -59,30 +60,28 @@ def postClientes():
                     cliente["linea_direccion2"]=clientedirecciónopcional.title()
                 else:
                     cliente["linea_direccion2"]= None
-                break
+                
+            # Pais
+            if(not cliente.get("pais")):
+                print("Lista de Paises")
+                for i,val in enumerate(clientes.Countries(),start=1):
+                    print (f'\t{i} {val}')
+                opseleccionada=input("Ingrese el numero del Pais del cliente : ")
+                if((re.match(r'^(?:1?\d?\d|2[0-4]\d|25[0-9])$',opseleccionada) is not None)): # Expresion regular me permite ingresar numeros del 1 al 249
+                    opseleccionada=int(opseleccionada)
+                    cliente["pais"]=clientes.Countries()[opseleccionada-1]
+                    break
+                else:
+                    raise Exception ("Elije una de las opciones presentadas")
         except Exception as error:
             print(error) 
     print(cliente)
     
-    peticion=requests.post ("http://192.168.1.16:5022",data=json.dumps(cliente, indent=4).encode("UTF-8"))
-    res=peticion.json()
-    res["Mensaje"]="Cliente  Guardado"
-    return[res]
+    # peticion=requests.post ("http://192.168.1.16:5022",data=json.dumps(cliente, indent=4).encode("UTF-8"))
+    # res=peticion.json()
+    # res["Mensaje"]="Cliente  Guardado"
+    # return[res]
     
-
-
-    
-    
-    
-
-    #     "codigo_cliente": 1,
-    #     "nombre_cliente": "GoldFish Garden",
-    #     "nombre_contacto": "Daniel G",
-    #     "apellido_contacto": "GoldFish",
-    #     "telefono": "5556901745",
-    #     "fax": "5556901746",
-    #     "linea_direccion1": "False Street 52 2 A",
-    #     "linea_direccion2": null,
     #     "ciudad": "San Francisco",
     #     "region": null,
     #     "pais": "USA",

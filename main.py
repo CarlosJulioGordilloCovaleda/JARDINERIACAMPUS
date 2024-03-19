@@ -2,7 +2,7 @@
 import os
 import sys 
 import re
-
+import json
 from click import clear
 import modules.getempleado as empleado
 import modules.getclientes as clientes
@@ -14,15 +14,25 @@ import modules.postProducto as PosP
 import modules.getgama as gG
 import modules.getclientes as cliente
 import modules.postClientes as PosCl
+import requests
+import pycountry
+from geopy.geocoders import Nominatim
 
+a=list(Nominatim.geocode)
+print(a)
 
 #print(cliente.codigosClientes()) #Para probar numeros de clientes
-
-PosCl.postClientes()
+#PosCl.postClientes()
 #PosP.postProducto() Terminado
 #print(producto.getNombresProveedores())
 
-# if(__name__=="__main__"):
+#if(__name__=="__main__"):    
+# numero=100                          Esto hay que probarlo mejor sirve para filtar
+# peticion=requests.get (f'http://172.16.106.242:5021/productos?precio_proveedor_gte={15}')
+# data=peticion.json()
+# print(data)
+    
+    #peticion = requests.get(f"http://172.16.106.242:5021/productos?codigo={codigo}")
 #     while True:
 #         os.system("cls")
 #         print(f"""
@@ -65,9 +75,16 @@ PosCl.postClientes()
 #                     PosP.menu()
 #                 elif op == 0:
 #                     break
-        
 
-        
-        
-       
-       
+
+
+## ESTO ES PARA PONER LOS ID A LOS JSON 
+# with open("storage/producto.json","r") as f:
+#     fichero = f.read()
+#     data=json.loads(fichero)
+#     for i, val in enumerate(data):
+#         data[i]["id"] = (i+1)
+#     data=json.dumps(data,indent=4).encode("UTF-8")
+#     with open("storage/producto.json","wb+") as f1:
+#         f1.write(data)
+#         f1.close()
