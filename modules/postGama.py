@@ -21,15 +21,16 @@ def PosGama():
                 descrip=input("Agregue un descripción maximo de 20 caracteres : ")
                 if(re.match(r'^.{1,20}$',descrip) is not None):
                     resultado["descripcion_texto"]=descrip.capitalize()
-                    
                 else:
                     raise Exception("La descripción supera el numero de caracteres")
+            # Descripcion    
             if(not(resultado.get("descripcion_html"))):
                 deshtml=input("Ingrese la descripcion en HTML: ")
                 if deshtml.split():
                     resultado["descripcion_html"]=deshtml.capitalize()
                 else:
                     resultado["descripcion_html"]=None
+            #Imagen
             resultado["imagen"]=None
             break
         except Exception as error:

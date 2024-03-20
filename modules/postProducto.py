@@ -32,12 +32,12 @@ def postProducto():
             #"Gama del Producto"
             if(not producto.get("gama")):
                 print("lista de gamas")
-                for i,val in enumerate(gG.getNombresGamma(),start=1):
+                for i,val in enumerate(gG.getNombresGammas(),start=1):
                     print(f'\t{i} {val}')
                 opcion_seleccionada=(input("Selecciona una gama : "))
                 if ((re.match(r'[1-5]+$',opcion_seleccionada) is not None)): # la opccion seleccionada debe estar entre 1  y 5 Expresion Regular
                     opcion_seleccionada=int(opcion_seleccionada)
-                    producto["gama"]=gG.getNombresGamma()[opcion_seleccionada-1]
+                    producto["gama"]=gG.getNombresGammas()[opcion_seleccionada-1]
                 else:
                     raise Exception ("El valor ingresado no corresponde a ninguna de las opciones, si desea ingresar una nueva gama debe hacerlo en el modulo de gamas")
                 #return nombre_gama_seleccionado    
@@ -68,12 +68,12 @@ def postProducto():
                 else:
                     raise Exception ("Formato invalido! RECUERDE la descripción debe tener al menos 10 caracteres")
             # Cantidad en stock
-            if(not producto.get("cantidad_en_stock")):
+            if(not producto.get("cantidadEnstock")):
                 stock=input("Ingrese las unidades adquiridas : ")
                 if stock.isdigit():
                     stock=int(stock)
                     if stock>=0:
-                        producto["cantidad_en_stock"]=stock
+                        producto["cantidadEnstock"]=stock
                         
                     else:
                         raise Exception ("Ingrese un numero Entero")
@@ -113,7 +113,7 @@ def postProducto():
             print(error)
     print(producto)
 
-    peticion=requests.post ("http://192.168.1.16:5021",data=json.dumps(producto, indent=4).encode("UTF-8")) 
+    peticion=requests.post ("http://154.38.171.54:5008/productos",data=json.dumps(producto, indent=4).encode("UTF-8")) 
     res=peticion.json()
     res["Mensaje"]="Producto Guardado"
     return[res]

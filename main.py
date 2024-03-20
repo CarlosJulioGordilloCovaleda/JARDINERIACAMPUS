@@ -19,12 +19,16 @@ import pycountry
 from countryinfo import CountryInfo
 import  modules.postPago as Pp
 import modules.postGama as Pgm
+import modules.getempleado as empleado
+import modules.posEmpleados as Pem
 
-#print(gG.getNombresGamma("hola"))
-Pgm.PosGama()
+
+#Pem.postEmpleados()
+#print(empleado.getAllcodigos()) Para probar lo que tiene que ver con empleados
+#Pgm.PosGama()
 #Pp.Pospagos() # Solo falta el ID-Ticket
-#PosCl.postClientes() Terminado
-#PosP.postProducto() #Terminado
+#PosCl.postClientes() #Terminado
+PosP.postProducto() #Terminado
 
 
 #if(__name__=="__main__"):    
@@ -80,13 +84,13 @@ Pgm.PosGama()
 
 
 ## ESTO ES PARA PONER LOS ID A LOS JSON 
-# with open("storage/producto.json","r") as f:
+# with open("storage/cliente.json","r") as f:
 #     fichero = f.read()
 #     data=json.loads(fichero)
 #     for i, val in enumerate(data):
 #         data[i]["id"] = (i+1)
 #     data=json.dumps(data,indent=4).encode("UTF-8")
-#     with open("storage/producto.json","wb+") as f1:
+#     with open("storage/cliente.json","wb+") as f1:
 #         f1.write(data)
 #         f1.close()
 
@@ -101,3 +105,4 @@ Pgm.PosGama()
 # print(ciudades)
 #print(list(pycountry.countries))
 #print(producto.getNombresProveedores())
+#print(gG.getNombresGamma("hola"))

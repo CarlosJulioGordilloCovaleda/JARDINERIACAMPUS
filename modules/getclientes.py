@@ -8,7 +8,7 @@ import modules.getempleado as Ge
 
 #http://192.168.1.16:5022 Direcciòn Clientes
 def getAllDataClientes():
-    peticion=requests.get("http://192.168.1.16:5022") 
+    peticion=requests.get("http://172.16.106.118:5022") 
     data=peticion.json()
     return data
 # Funcion que devuelva los codigos de los clientes

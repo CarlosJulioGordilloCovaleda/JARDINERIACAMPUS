@@ -4,9 +4,9 @@ import os
 from tabulate import tabulate
 import requests
 
-#Remote: http://192.168.1.16:5021 Productos
+#Remote: http://154.38.171.54:5008/productos  Servidor Profe
 def allGetDataProductos():
-    peticion=requests.get("http://172.16.106.138:5021/productos")
+    peticion=requests.get("http://154.38.171.54:5008/productos")
     data=peticion.json()
     return data
 # Funcion que ayuda a eliminar los id
@@ -58,12 +58,12 @@ def allGetDataDetallepedido():
 def getAllNombreyCodigoproductostock50menoss():
     listarespuesta=[]
     for val in allGetDataProductos():
-        if val.get("cantidad_en_stock")!=None:
-            if val.get("cantidad_en_stock")<=15:
+        if val.get("cantidadEnStock")!=None:
+            if val.get("cantidadEnStock")<=15:
                 listarespuesta.append({
                     "Codigo Producto":val.get("codigo_producto"),
                     "Nombre del Producto":val.get("nombre"),
-                    "Cantidad en Bodega":(f'Hay {val.get("cantidad_en_stock")} unidades disponibles')
+                    "Cantidad en Bodega":(f'Hay {val.get("cantidadEnStock")} unidades disponibles')
             })
     return listarespuesta
 # Lista donde me de los productos que mas utilidad me dejan nombres de los productos y gama
@@ -123,7 +123,7 @@ def clientesquemascompran():
 def getAllStockPriceGamma(gama,stock):
     condiciones=[]
     for val in allGetDataProductos():
-        if(val.get("gama") == gama and val.get("cantidad_en_stock")>stock):
+        if(val.get("gama") == gama and val.get("cantidadEnStock")>stock):
             condiciones.append(val)
     def price(val):
         return val.get("precio_venta")

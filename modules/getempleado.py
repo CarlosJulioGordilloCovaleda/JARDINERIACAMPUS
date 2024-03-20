@@ -4,9 +4,16 @@ import requests
 
 # http://192.168.1.16:5025 Puerto de empleado 
 def gellAlldataEmpleados():
-     peticion=requests.get("http://192.168.1.16:5025")
+     peticion=requests.get("http://172.16.106.14:5025")
      data=peticion.json()
      return data
+
+def getAllcodigos():
+    codes=[]
+    for val in gellAlldataEmpleados():
+        codes.append(val.get("codigo_empleado"))
+    return codes
+          
 #Devueelve el nombre  del puesto,nombre y apellido y emails del jefe de la empresa
 def getAllPuestoNombreApellidosEmail(codigo_jefe):
     PuestoNombreApellidosEmail = []
