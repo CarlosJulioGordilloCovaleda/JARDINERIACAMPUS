@@ -6,6 +6,8 @@ import json
 import modules.getclientes as clientes
 from tabulate import tabulate
 import pycountry
+from countryinfo import CountryInfo
+import modules.getempleado as Ge
 
 def postClientes():
     cliente=dict()
@@ -59,8 +61,7 @@ def postClientes():
                 if clientedirecciónopcional.strip(): #  strip() se utiliza para eliminar cualquier espacio en blanco alrededor de la entrada del usuario
                     cliente["linea_direccion2"]=clientedirecciónopcional.title()
                 else:
-                    cliente["linea_direccion2"]= None
-                
+                    cliente["linea_direccion2"]= None     
             # Pais
             if(not cliente.get("pais")):
                 print("Lista de Paises")
@@ -70,9 +71,74 @@ def postClientes():
                 if((re.match(r'^(?:1?\d?\d|2[0-4]\d|25[0-9])$',opseleccionada) is not None)): # Expresion regular me permite ingresar numeros del 1 al 249
                     opseleccionada=int(opseleccionada)
                     cliente["pais"]=clientes.Countries()[opseleccionada-1]
-                    break
+                    if cliente["pais"]=="United States":
+                            cliente["pais"]="USA"
+                    else:
+                        cliente["pais"]=clientes.Countries()[opseleccionada-1]
                 else:
-                    raise Exception ("Elije una de las opciones presentadas")
+                    raise Exception ("Elije una de las opciones presentadas: ")
+            # Region    
+            if(not cliente.get("region")):
+                pais=(cliente["pais"])
+                country_info=CountryInfo(pais)
+                provincia=country_info.provinces()
+                print("Lista de regiones")
+                for i,val in enumerate(provincia,start=1):
+                    print (f'\t{i} {val}')
+                opcion=input("ingrese una opcion para seleccionar su región : ") 
+                if opcion.isdigit():
+                    opcion=int(opcion)
+                    if opcion in range(1,len(provincia)+1):
+                        cliente["region"]=provincia[opcion-1]
+                    else:
+                        raise Exception("El numero ingresado no esta dentro del rango ")
+                else:
+                    raise Exception("Ingrese un numero entero ")      
+            #codigo_empleado_rep_ventas
+            if (not cliente.get("codigo_empleado_rep_ventas")):
+                print("Lista de representates en ventas con su codigo")
+                data=Ge.getNombreApellidosPuestoRepVentas()
+                print(tabulate(data,headers="keys",tablefmt="github"))
+                opcion=(input("Escriba el codigo del representate de ventas que desea asignar al cliente : "))
+                if opcion.isdigit():
+                    opcion=int(opcion)
+                    codes=[]
+                    for val in data:
+                        codes.append(val.get("Codigo"))
+                    if opcion in codes:
+                        cliente["codigo_empleado_rep_ventas"]=opcion
+                    else:
+                        raise Exception("Agregue una opcion valida")
+                else:
+                    raise Exception("Ingrese solo el codigo numerico")
+            #Ingrese la ciudad
+            if(not cliente.get("ciudad")):
+                clienteciudad=input(" Ingrese la ciudad del cliente : ")
+                cliente["ciudad"]=clienteciudad.title()
+            #Ingrese el codigo Postal
+            if(not cliente.get("codigo_postal")):
+                clientecodigopostal=input("Ingrese el codigo postal del cliente : ")
+                if clientecodigopostal.isdigit():
+                    if (re.match(r'^\d{4,8}$',clientecodigopostal)is not None):
+                        cliente["codigo_postal"]=clientecodigopostal
+                    else:
+                        raise Exception("Ingresa el codigo postal bajo las condicones estandar")
+                else:
+                    raise Exception("Ingrese un numero")
+            #Ingrese limite_Credito
+            if(not cliente.get("limite_credito")):
+                clientecredito=input("Ingrese el limite de credito del cliente: ")
+                if clientecredito.isdigit():
+                    clientecredito=float(clientecredito)        
+                    if clientecredito!=None:
+                        cliente["limite_credito"]=clientecredito
+                        break
+                    else:
+                        raise Exception("Si no se otorga cupo al cliente ingrese 0")
+                else:
+                    raise Exception("Ingrese un numero")
+            
+                
         except Exception as error:
             print(error) 
     print(cliente)
@@ -83,8 +149,5 @@ def postClientes():
     # return[res]
     
     #     "ciudad": "San Francisco",
-    #     "region": null,
-    #     "pais": "USA",
     #     "codigo_postal": "24006",
-    #     "codigo_empleado_rep_ventas": 19,
     #     "limite_credito": 3000.0

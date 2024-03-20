@@ -1,7 +1,7 @@
 from datetime import datetime
 from tabulate import tabulate
-import storage.empleado as em
 import requests
+import modules.getempleado as Ge
 
 #Remote: http://172.16.104.20:5019 Servidos Pagos
 def getAllDataPagos():
@@ -68,7 +68,7 @@ def getAllNombreClientePagoRepVentas():
                 })
     listadef=[]
     for val3 in lista2:
-        for val4 in em.empleados:
+        for val4 in Ge.gellAlldataEmpleados():
             if val3.get("Codigo del Vendedor")==val4.get("codigo_empleado"):
                 listadef.append({
                     "Nombre del cliente":val3.get("Nombre del Cliente"),
@@ -92,7 +92,7 @@ def getAllNombreClientequenohanpago():
                 })
     listadef=[]
     for val3 in lista2:
-        for val4 in em.empleados:
+        for val4 in Ge.gellAlldataEmpleados():
             if val3.get("Codigo del Vendedor")==val4.get("codigo_empleado"):
                 listadef.append({
                     "Nombre del cliente":val3.get("Nombre del Cliente"),

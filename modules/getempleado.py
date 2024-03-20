@@ -1,10 +1,16 @@
-import storage.empleado as em 
-from tabulate import tabulate
-#Devueelve el nombre  del puesto,nombre y apellido y emails del jefe de la empresa
 
+from tabulate import tabulate
+import requests
+
+# http://192.168.1.16:5025 Puerto de empleado 
+def gellAlldataEmpleados():
+     peticion=requests.get("http://192.168.1.16:5025")
+     data=peticion.json()
+     return data
+#Devueelve el nombre  del puesto,nombre y apellido y emails del jefe de la empresa
 def getAllPuestoNombreApellidosEmail(codigo_jefe):
     PuestoNombreApellidosEmail = []
-    for val in em.empleados:
+    for val in gellAlldataEmpleados():
         if (val.get("codigo_jefe")==None):
             PuestoNombreApellidosEmail.append({
                 "puesto":val.get("puesto"),
@@ -13,12 +19,10 @@ def getAllPuestoNombreApellidosEmail(codigo_jefe):
                 "email":val.get("email")
            }) 
             return PuestoNombreApellidosEmail
-
 #Devuele un listado con el nombre,apellido y puesto de aquellos empleados que no sean representantes de ventas
-
 def getNombreApellidosPuesto(puesto):
     NombreApellidosPuesto= []
-    for val in em.empleados:
+    for val in gellAlldataEmpleados():
             if(val.get("puesto")!="Representante Ventas"):
                 NombreApellidosPuesto.append({
                 "Nombre":val.get("nombre"),
@@ -26,13 +30,24 @@ def getNombreApellidosPuesto(puesto):
                 "puesto":val.get("puesto")
                 })
     return NombreApellidosPuesto
-
+#Devuele un listado con el nombre,apellido y puesto de aquellos empleados que sean representantes de ventas
+def getNombreApellidosPuestoRepVentas():
+    NombreApellidosPuesto= []
+    for val in gellAlldataEmpleados():
+            if(val.get("puesto")=="Representante Ventas"):
+                NombreApellidosPuesto.append({
+                "Codigo":val.get("codigo_empleado"),
+                "Nombre":val.get("nombre"),
+                "apellidos":f"{val.get('apellido1')} {val.get('apellido2')}",
+                "puesto":val.get("puesto")
+                })
+    return NombreApellidosPuesto
 # Devuelve un listado con los nombres y apellidos y e-mails de los empleados cuyo Jefe tiene
 #un codigo de jefe igual a 7
 
 def getAllNombresApellidosEmailsempleadosJefe7():
     listadedatos=[]
-    for val in em.empleados:
+    for val in gellAlldataEmpleados():
         if val.get("codigo_jefe")==7:
             listadedatos.append({
             "Nombres y Apellidos":(f'{val.get("nombre")} {val.get("apellido1")} {val.get("apellido2")}'),

@@ -1,16 +1,17 @@
 
 from tabulate import tabulate
-import storage.empleado as em
 import requests
 import pycountry
+from countryinfo import CountryInfo
+import modules.getempleado as Ge
+
 
 #http://192.168.1.16:5022 Direcciòn Clientes
 def getAllDataClientes():
-    peticion=requests.get("http://192.168.1.16:5022")
+    peticion=requests.get("http://192.168.1.16:5022") 
     data=peticion.json()
     return data
 # Funcion que devuelva los codigos de los clientes
-
 def codigosClientes():
     lista=[]
     for val in getAllDataClientes():
@@ -23,8 +24,21 @@ def Countries():
     for pais in paises:
        lista.append(pais.name) # No utilizo .append por que la es un objetoo. country y no undiccionario
     return lista
-# Funcion para encontrar la ciudad y codigo postal
+# Funcion para encontrar Provincia por pais
+def obtener_provinciaspor(pais):
+    country_info=CountryInfo(pais)
+    provincia=country_info.provinces()
+    return provincia
 
+#     geolocator = Nominatim(user_agent="Clientes")
+#     ubicaciones = geolocator.geocode(pais, exactly_one=False, limit=None, addressdetails=True)
+#     lista_ciudad_codigo = []
+#     for val in ubicaciones:
+#         ciudad = val.raw["address"].get("town", "")
+#         codigo_postal = val.raw["address"].get("postcode", "")
+#         if ciudad:
+#             lista_ciudad_codigo.append((ciudad, codigo_postal))
+#     return lista_ciudad_codigo
 
 # Devuelve un listado con todos los nombres de los clientes españoles
 
@@ -65,7 +79,7 @@ def getAllNombreClientesyNombreyApellidoEmpleados():
         })
         listaresultado=[]
     for cliente in resultado:
-        for val2 in em.empleados:
+        for val2 in Ge.gellAlldataEmpleados():
             if cliente.get("Codigo_Cliente")==val2.get("codigo_empleado"):
                 listaresultado.append({
                     "Nombre Cliente":cliente.get("Nombre_Cliente"),

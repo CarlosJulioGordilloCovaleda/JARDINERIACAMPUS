@@ -16,14 +16,19 @@ import modules.getclientes as cliente
 import modules.postClientes as PosCl
 import requests
 import pycountry
-from geopy.geocoders import Nominatim
+from countryinfo import CountryInfo
 
-a=list(Nominatim.geocode)
-print(a)
+
+# country_info=CountryInfo("france")
+# ciudades=country_info.provinces()
+# print(ciudades)
+#print(list(pycountry.countries))
+
+#print(clientes.obtener_provinciaspor("Spain"))
 
 #print(cliente.codigosClientes()) #Para probar numeros de clientes
-#PosCl.postClientes()
-#PosP.postProducto() Terminado
+PosCl.postClientes()
+#PosP.postProducto() #Terminado
 #print(producto.getNombresProveedores())
 
 #if(__name__=="__main__"):    
