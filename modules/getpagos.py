@@ -5,17 +5,17 @@ import modules.getempleado as Ge
 
 #Remote: http://172.16.104.20:5019 Servidos Pagos
 def getAllDataPagos():
-    peticion = requests.get("http://172.16.104.45:5019")
+    peticion = requests.get("http://192.168.1.16:5019")
     data = peticion.json()
     return data
-#http://172.16.104.45:5022  Clientes
-def getAllDataClientes():
-    peticion=requests.get("http://172.16.104.45:5022")
-    data=peticion.json()
-    return data
 
-
-
+# Formas de Pago
+def formadepago():
+    Fpagos=set()
+    for val in getAllDataPagos():
+        Fpagos.add(val.get("forma_pago"))
+    F_pagos=list(Fpagos)
+    return F_pagos
 
 #Devuelve un listado con el codigo de cliente de aquello clientes
 #que realizaron algun pago en 2008 tenga en cuenta que debera
@@ -53,14 +53,14 @@ def getAllPagos2008Paypal():
 
 def getAllNombreClientePagoRepVentas():
     ListaClientespagados=set()
-    for val in getAllDataClientes():
+    for val in Ge.Ge.getAllDataClientes():
         ListaClientespagados.add(
             val.get("codigo_cliente"),
         )
         ListaClientespagado=[{"Codigo del Cliente":code} for code in ListaClientespagados]
     lista2=[]
     for cliente in ListaClientespagado:
-        for val2 in getAllDataClientes():
+        for val2 in Ge.Ge.getAllDataClientes():
             if cliente.get("Codigo del Cliente")==val2.get("codigo_cliente"):
                 lista2.append({
                     "Nombre del Cliente":val2.get("nombre_cliente"),
@@ -77,14 +77,14 @@ def getAllNombreClientePagoRepVentas():
     return listadef
 def getAllNombreClientequenohanpago():
     ListaClientespagados=set()
-    for val in getAllDataClientes():
+    for val in Ge.Ge.getAllDataClientes():
         ListaClientespagados.add(
             val.get("codigo_cliente"),
         )
         ListaClientespagado=[{"Codigo del Cliente":code} for code in ListaClientespagados]
     lista2=[]
     for cliente in ListaClientespagado:
-        for val2 in getAllDataClientes():
+        for val2 in Ge.Ge.getAllDataClientes():
             if cliente.get("Codigo del Cliente")!=val2.get("codigo_cliente"):
                 lista2.append({
                     "Nombre del Cliente":val2.get("nombre_cliente"),

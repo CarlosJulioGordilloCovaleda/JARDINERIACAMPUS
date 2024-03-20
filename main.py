@@ -17,19 +17,14 @@ import modules.postClientes as PosCl
 import requests
 import pycountry
 from countryinfo import CountryInfo
+import  modules.postPago as Pp
 
 
-# country_info=CountryInfo("france")
-# ciudades=country_info.provinces()
-# print(ciudades)
-#print(list(pycountry.countries))
 
-#print(clientes.obtener_provinciaspor("Spain"))
-
-#print(cliente.codigosClientes()) #Para probar numeros de clientes
-PosCl.postClientes()
+Pp.Pospagos() # En proceso
+#PosCl.postClientes() Terminado
 #PosP.postProducto() #Terminado
-#print(producto.getNombresProveedores())
+
 
 #if(__name__=="__main__"):    
 # numero=100                          Esto hay que probarlo mejor sirve para filtar
@@ -93,3 +88,15 @@ PosCl.postClientes()
 #     with open("storage/producto.json","wb+") as f1:
 #         f1.write(data)
 #         f1.close()
+
+
+
+
+# -----------------------PRUEBAS--------------------------------
+#print(clientes.obtener_provinciaspor("Spain"))
+#print(cliente.codigosClientes()) #Para probar numeros de clientes
+# country_info=CountryInfo("france")
+# ciudades=country_info.provinces()
+# print(ciudades)
+#print(list(pycountry.countries))
+#print(producto.getNombresProveedores())

@@ -17,6 +17,15 @@ def codigosClientes():
     for val in getAllDataClientes():
         lista.append(val.get("codigo_cliente"))
     return lista
+# Funcion para obtener el cliente mas su codigo
+def codigosClientesyNombre():
+    lista=[]
+    for val in getAllDataClientes():
+        lista.append({
+            "Codigo":val.get("codigo_cliente"),
+            "Nombre Cliente":val.get("nombre_cliente")                       
+        })
+    return lista
 # Funcion para obtener una lista de paises 
 def Countries():
     lista=[]
@@ -41,8 +50,6 @@ def obtener_provinciaspor(pais):
 #     return lista_ciudad_codigo
 
 # Devuelve un listado con todos los nombres de los clientes españoles
-
-
 def Nombres():
     Nombres = []
     for val in getAllDataClientes():
