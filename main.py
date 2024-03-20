@@ -18,10 +18,11 @@ import requests
 import pycountry
 from countryinfo import CountryInfo
 import  modules.postPago as Pp
+import modules.postGama as Pgm
 
-
-
-Pp.Pospagos() # En proceso
+#print(gG.getNombresGamma("hola"))
+Pgm.PosGama()
+#Pp.Pospagos() # Solo falta el ID-Ticket
 #PosCl.postClientes() Terminado
 #PosP.postProducto() #Terminado
 

@@ -44,7 +44,6 @@ def Pospagos():
                 fechapago=input("Ingresa la fecha de pago en el siguiente formato YYYY-MM-DD Todo en numeros: ") 
                 if((re.match(r'^\d{4}-(0[1-9]|1[0-2])-([0-2][0-9]|3[01])$',fechapago)) is not None): # Expresion regular es para fechas en años mes y dia que los meses sean entre 1 y 12 y los dias de 1 a 31
                     pago["fecha_pago"]=fechapago
-                
                 else:
                     raise Exception("Formato Incorrecto,ingrese nuevamente la fecha de pago")
             # total 
