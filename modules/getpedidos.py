@@ -2,31 +2,18 @@
 from datetime import datetime
 from tabulate import tabulate
 import requests
-
+# "http://154.38.171.54:5007/pedidos" Servidor Profe
 # Remote: ttp://172.16.104.45:5024 Pedido
 def allGetDataPedido():
-    peticion=requests.get("http://172.16.104.45:5024")
+    peticion=requests.get("http://154.38.171.54:5007/pedidos")
     data=peticion.json()
     return data
+# "http://154.38.171.54:5002/detalle_pedido" Servidor Profe
 # Remote http://172.16.104.45:5023 Detalle pedido
-
 def allGetDataDetallepedido():
-    peticion=requests.get("http://172.16.104.45:5023")
+    peticion=requests.get("http://154.38.171.54:5002/detalle_pedido")
     data=peticion.json()
     return data
-
-# Remote: ttp://172.16.104.45:5024 Pedido
-def allGetDataPedido():
-    peticion=requests.get("http://172.16.104.45:5024")
-    data=peticion.json()
-    return data
-# Remote http://172.16.104.45:5023 Detalle pedido
-
-def allGetDataDetallepedido():
-    peticion=requests.get("http://172.16.104.45:5023")
-    data=peticion.json()
-    return data
-
 #Devuelve un listado con los distintos estados por los que puede pasar un pedido
 def getAllDiferentesEstados():
     DiferentesEstados=set()
@@ -125,14 +112,22 @@ def getAllPedidosEntregadosdelmesdeenero():
 def menu():
     print(""" 
 
-                                 Reporte de Pedidos
+                                 
+██████╗ ███████╗██████╗  ██████╗ ██████╗ ████████╗███████╗    ██████╗ ███████╗██████╗ ██╗██████╗  ██████╗ ███████╗
+██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝██╔══██╗██║██╔══██╗██╔═══██╗██╔════╝
+██████╔╝█████╗  ██████╔╝██║   ██║██████╔╝   ██║   █████╗      ██████╔╝█████╗  ██║  ██║██║██║  ██║██║   ██║███████╗
+██╔══██╗██╔══╝  ██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝      ██╔═══╝ ██╔══╝  ██║  ██║██║██║  ██║██║   ██║╚════██║
+██║  ██║███████╗██║     ╚██████╔╝██║  ██║   ██║   ███████╗    ██║     ███████╗██████╔╝██║██████╔╝╚██████╔╝███████║
+╚═╝  ╚═╝╚══════╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝    ╚═╝     ╚══════╝╚═════╝ ╚═╝╚═════╝  ╚═════╝ ╚══════╝
+                                                                                                                  
+
           1.Listado de los estados por los que puede pasar un pedido.
           2.Listado con el codigo de pedido, codigo de cliente,fecha esperada y fecha de entrega 
            de los pedidosentregados a tiempos.
-          3. Listado con el codigo de pedido, codigo de cliente, fecha esperada y fecha de entrega
-           de los pedidos cuya fecha de entrega ha sido al menos dos dias de la fecha esperada.
-          4. Listado de todos los pedidos que fueron rechazados en 2009.
-          5. listado de todos los pedidos que han sido entregados en el mes de enero de cualquier año.
+          3.Listado con el codigo de pedido, codigo de cliente, fecha esperada y fecha de entrega
+            de los pedidos cuya fecha de entrega ha sido al menos dos dias de la fecha esperada.
+          4.Listado de todos los pedidos que fueron rechazados en 2009.
+          5.Listado de todos los pedidos que han sido entregados en el mes de enero de cualquier año.
 """)
     opcion=int(input("Ingrese el numero de la opción que desea observar : "))
     

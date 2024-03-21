@@ -3,9 +3,10 @@ from tabulate import tabulate
 import requests
 import modules.getempleado as Ge
 
+# http://154.38.171.54:5006/pagos" Servidor Profe
 #Remote: http://172.16.104.20:5019 Servidos Pagos
 def getAllDataPagos():
-    peticion = requests.get("http://192.168.1.16:5019")
+    peticion = requests.get("http://154.38.171.54:5006/pagos")
     data = peticion.json()
     return data
 
@@ -104,7 +105,15 @@ def menu():
 
     print(""" 
             
-                      Reporte de Pagos
+                      
+██████╗ ███████╗██████╗  ██████╗ ██████╗ ████████╗███████╗    ██████╗ ███████╗    ██████╗  █████╗  ██████╗  ██████╗ ███████╗
+██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝    ██╔══██╗██╔══██╗██╔════╝ ██╔═══██╗██╔════╝
+██████╔╝█████╗  ██████╔╝██║   ██║██████╔╝   ██║   █████╗      ██║  ██║█████╗      ██████╔╝███████║██║  ███╗██║   ██║███████╗
+██╔══██╗██╔══╝  ██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝      ██║  ██║██╔══╝      ██╔═══╝ ██╔══██║██║   ██║██║   ██║╚════██║
+██║  ██║███████╗██║     ╚██████╔╝██║  ██║   ██║   ███████╗    ██████╔╝███████╗    ██║     ██║  ██║╚██████╔╝╚██████╔╝███████║
+╚═╝  ╚═╝╚══════╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝    ╚═════╝ ╚══════╝    ╚═╝     ╚═╝  ╚═╝ ╚═════╝  ╚═════╝ ╚══════╝
+                                                                                                                            
+
           
           1.listado con el codigo de cliente que realizaron algun pago en 2008 
           2.listado de todos los pagos que se realizaron en el año 2008  mediante PayPal de mayor a menor

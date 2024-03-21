@@ -12,7 +12,6 @@ def getNombresGammas():
         data.append(val.get("gama"))
     return data
 
-    
 def getNombresGamma(gama):
     for val in getAllgamas():
         if (val.get("gama")==gama):

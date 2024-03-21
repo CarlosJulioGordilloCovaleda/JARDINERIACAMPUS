@@ -11,7 +11,7 @@ def allGetDataProductos():
     return data
 # Funcion que ayuda a eliminar los id
 def getProductCodigoID(codigo):
-    peticion=requests.get(f"http://172.16.106.138:5021/productos{codigo}")
+    peticion=requests.get(f"http://154.38.171.54:5008/productos{codigo}")
     return [peticion.json()] if peticion.ok else []
   
 # Funcion para llamar los Codigos de los productos y compararlos si ya esxisten
@@ -132,7 +132,15 @@ def menu():
     while True:
         os.system("cls")
         print("""   
-                        Reporte Productos
+                       
+    ██████╗ ███████╗██████╗  ██████╗ ██████╗ ████████╗███████╗    ██████╗ ██████╗  ██████╗ ██████╗ ██╗   ██╗ ██████╗████████╗ ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝    ██╔══██╗██╔══██╗██╔═══██╗██╔══██╗██║   ██║██╔════╝╚══██╔══╝██╔═══██╗██╔════╝
+    ██████╔╝█████╗  ██████╔╝██║   ██║██████╔╝   ██║   █████╗      ██████╔╝██████╔╝██║   ██║██║  ██║██║   ██║██║        ██║   ██║   ██║███████╗
+    ██╔══██╗██╔══╝  ██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝      ██╔═══╝ ██╔══██╗██║   ██║██║  ██║██║   ██║██║        ██║   ██║   ██║╚════██║
+    ██║  ██║███████╗██║     ╚██████╔╝██║  ██║   ██║   ███████╗    ██║     ██║  ██║╚██████╔╝██████╔╝╚██████╔╝╚██████╗   ██║   ╚██████╔╝███████║
+    ╚═╝  ╚═╝╚══════╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝    ╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝  ╚═════╝   ╚═╝    ╚═════╝ ╚══════╝
+                                                                                                                                              
+
           
             1.Lista de los productos con un stock igual o menor a 15 unidades
             2.Lista de productos que mas utilidad generan

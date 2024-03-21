@@ -2,12 +2,13 @@
 from tabulate import tabulate
 import requests
 
+# "http://154.38.171.54:5003/empleados Puerto Servidor Profe
 # http://192.168.1.16:5025 Puerto de empleado 
 def gellAlldataEmpleados():
-     peticion=requests.get("http://172.16.106.14:5025")
+     peticion=requests.get("http://154.38.171.54:5003/empleados")
      data=peticion.json()
      return data
-
+# Obtienes todos los codigos de los empleados
 def getAllcodigos():
     codes=[]
     for val in gellAlldataEmpleados():
@@ -63,15 +64,23 @@ def getAllNombresApellidosEmailsempleadosJefe7():
     return listadedatos
 
 
-
 def menu():
     print(""" 
-                     Reporte Empleados
+                    
+    ██████╗ ███████╗██████╗  ██████╗ ██████╗ ████████╗███████╗    ███████╗███╗   ███╗██████╗ ██╗     ███████╗ █████╗ ██████╗  ██████╗ ███████╗
+    ██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝    ██╔════╝████╗ ████║██╔══██╗██║     ██╔════╝██╔══██╗██╔══██╗██╔═══██╗██╔════╝
+    ██████╔╝█████╗  ██████╔╝██║   ██║██████╔╝   ██║   █████╗      █████╗  ██╔████╔██║██████╔╝██║     █████╗  ███████║██║  ██║██║   ██║███████╗
+    ██╔══██╗██╔══╝  ██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝      ██╔══╝  ██║╚██╔╝██║██╔═══╝ ██║     ██╔══╝  ██╔══██║██║  ██║██║   ██║╚════██║
+    ██║  ██║███████╗██║     ╚██████╔╝██║  ██║   ██║   ███████╗    ███████╗██║ ╚═╝ ██║██║     ███████╗███████╗██║  ██║██████╔╝╚██████╔╝███████║
+    ╚═╝  ╚═╝╚══════╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝    ╚══════╝╚═╝     ╚═╝╚═╝     ╚══════╝╚══════╝╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚══════╝
+                                                                                                                                              
+
            
-           1. Datos del Jefe de la Empresa
-           2. Listado con el nombre,apellido y puesto de aquellos empleados que no sean representantes de ventas
-           3. Listado con los nombres y apellidos y e-mails de los empleados cuyo Jefe tiene
-              un codigo de jefe igual a 7
+           1.   Datos del Jefe de la Empresa
+           2.   Listado con el nombre,apellido y puesto de aquellos empleados que no sean representantes de ventas
+           3.   Listado con el nombre,apellido y puesto de aquellos empleados que sean representantes de ventas
+           4.   Listado con los nombres y apellidos y e-mails de los empleados cuyo Jefe tiene un codigo de jefe
+                igual a 7
 
 """)
     opcion=int(input(" Ingrese una opción : "))
@@ -84,4 +93,9 @@ def menu():
          print(tabulate(getNombreApellidosPuesto(puesto),headers="keys", tablefmt="github"))
     
     elif opcion==3:
+         puesto="Representante Ventas"
+         print(tabulate(getNombreApellidosPuestoRepVentas(puesto),headers="keys", tablefmt="github"))
+    
+    
+    elif opcion==4:
         print(tabulate(getAllNombresApellidosEmailsempleadosJefe7(),headers="keys",tablefmt="github"))

@@ -2,10 +2,10 @@ import os
 import re
 from tabulate import tabulate
 import requests
-
+# "http://154.38.171.54:5005/oficinas" Servidor Profe
 # Puerto Oficina http://172.16.106.118:5026
 def getAllDataoficina():
-    peticion = requests.get("http://172.16.106.118:5026")
+    peticion = requests.get("http://154.38.171.54:5005/oficinas")
     data = peticion.json()
     return data
 #Devuelve un listado con el codigo de Oficina y ciudad donde hay oficina
@@ -34,9 +34,15 @@ def menu():
         os.systema("cls")
         print(""" 
                      
-                            Reporte de Oficinas
-              
-              
+                            
+██████╗ ███████╗██████╗  ██████╗ ██████╗ ████████╗███████╗    ██████╗ ███████╗     ██████╗ ███████╗██╗ ██████╗██╗███╗   ██╗ █████╗ ███████╗
+██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝    ██╔══██╗██╔════╝    ██╔═══██╗██╔════╝██║██╔════╝██║████╗  ██║██╔══██╗██╔════╝
+██████╔╝█████╗  ██████╔╝██║   ██║██████╔╝   ██║   █████╗      ██║  ██║█████╗      ██║   ██║█████╗  ██║██║     ██║██╔██╗ ██║███████║███████╗
+██╔══██╗██╔══╝  ██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝      ██║  ██║██╔══╝      ██║   ██║██╔══╝  ██║██║     ██║██║╚██╗██║██╔══██║╚════██║
+██║  ██║███████╗██║     ╚██████╔╝██║  ██║   ██║   ███████╗    ██████╔╝███████╗    ╚██████╔╝██║     ██║╚██████╗██║██║ ╚████║██║  ██║███████║
+╚═╝  ╚═╝╚══════╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝    ╚═════╝ ╚══════╝     ╚═════╝ ╚═╝     ╚═╝ ╚═════╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚══════╝
+                                                                                                                                           
+      
           1. Listado de codigo de oficina y en que ciudad se ubica
           2. Listado de las oficinas ubicadas en España con su numero de telefono y correspondiente ciudad
  """)

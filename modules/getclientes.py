@@ -5,10 +5,10 @@ import pycountry
 from countryinfo import CountryInfo
 import modules.getempleado as Ge
 
-
+#"http://154.38.171.54:5001/cliente" Servidor del profe
 #http://192.168.1.16:5022 Direcciòn Clientes
 def getAllDataClientes():
-    peticion=requests.get("http://172.16.106.118:5022") 
+    peticion=requests.get("http://154.38.171.54:5001/cliente") 
     data=peticion.json()
     return data
 # Funcion que devuelva los codigos de los clientes
@@ -38,16 +38,6 @@ def obtener_provinciaspor(pais):
     country_info=CountryInfo(pais)
     provincia=country_info.provinces()
     return provincia
-
-#     geolocator = Nominatim(user_agent="Clientes")
-#     ubicaciones = geolocator.geocode(pais, exactly_one=False, limit=None, addressdetails=True)
-#     lista_ciudad_codigo = []
-#     for val in ubicaciones:
-#         ciudad = val.raw["address"].get("town", "")
-#         codigo_postal = val.raw["address"].get("postcode", "")
-#         if ciudad:
-#             lista_ciudad_codigo.append((ciudad, codigo_postal))
-#     return lista_ciudad_codigo
 
 # Devuelve un listado con todos los nombres de los clientes españoles
 def Nombres():
@@ -102,12 +92,24 @@ def menu():
     while True:
         print(""" 
 
-                Reporte de los clientes
+                
+██████╗ ███████╗██████╗  ██████╗ ██████╗ ████████╗███████╗     ██████╗██╗     ██╗███████╗███╗   ██╗████████╗███████╗███████╗
+██╔══██╗██╔════╝██╔══██╗██╔═══██╗██╔══██╗╚══██╔══╝██╔════╝    ██╔════╝██║     ██║██╔════╝████╗  ██║╚══██╔══╝██╔════╝██╔════╝
+██████╔╝█████╗  ██████╔╝██║   ██║██████╔╝   ██║   █████╗      ██║     ██║     ██║█████╗  ██╔██╗ ██║   ██║   █████╗  ███████╗
+██╔══██╗██╔══╝  ██╔═══╝ ██║   ██║██╔══██╗   ██║   ██╔══╝      ██║     ██║     ██║██╔══╝  ██║╚██╗██║   ██║   ██╔══╝  ╚════██║
+██║  ██║███████╗██║     ╚██████╔╝██║  ██║   ██║   ███████╗    ╚██████╗███████╗██║███████╗██║ ╚████║   ██║   ███████╗███████║
+╚═╝  ╚═╝╚══════╝╚═╝      ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚══════╝     ╚═════╝╚══════╝╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝╚══════╝
+                                                                                                                            
+
             0. Atras
+              
             1. Obtener los nombres de los clientes Españoles
-            2.listado con todos los clientes que sean de la ciudad de madrid
-              y cuyo representante de venta tenga el codigo de empleado 11 0 30
-            3. Ensayo
+              
+            2  Listado con todos los clientes que sean de la ciudad de madrid 
+               y cuyo representante de venta tenga el codigo de empleado 11 0 30.
+              
+            3. Obten un listado con el nombre de cada cliente y el nombre y el apellido
+               de su representante de ventas.
             
 
     """)
