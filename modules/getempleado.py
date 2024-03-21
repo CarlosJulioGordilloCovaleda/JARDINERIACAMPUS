@@ -14,6 +14,32 @@ def getAllcodigos():
     for val in gellAlldataEmpleados():
         codes.append(val.get("codigo_empleado"))
     return codes
+# Obtiene todos los emails 
+def getAllemails():
+    emailslist=[]
+    for val in gellAlldataEmpleados():
+        emailslist.append(val.get("email"))         
+    return emailslist
+#Puestos de la empresa
+def getAllpuestos():
+    puestos=set()
+    for val in gellAlldataEmpleados():
+        puestos.add(val.get("puesto"))
+    puestos_lista=list(puestos)
+    return puestos_lista
+# Directores de Oficina
+def getAllpuestosdir():
+    directoresoficina=list()
+    for val in gellAlldataEmpleados():
+        if val.get("puesto")=="Director Oficina":
+            directoresoficina.append({
+                "Puesto":val.get("puesto"),
+                "Codigo Oficina":val.get("codigo_oficina"),
+                "Codigo Empleado":val.get("codigo_empleado")
+            })
+    
+    return directoresoficina
+
           
 #Devueelve el nombre  del puesto,nombre y apellido y emails del jefe de la empresa
 def getAllPuestoNombreApellidosEmail(codigo_jefe):
@@ -28,7 +54,7 @@ def getAllPuestoNombreApellidosEmail(codigo_jefe):
            }) 
             return PuestoNombreApellidosEmail
 #Devuele un listado con el nombre,apellido y puesto de aquellos empleados que no sean representantes de ventas
-def getNombreApellidosPuesto(puesto):
+def getNombreApellidosPuesto():
     NombreApellidosPuesto= []
     for val in gellAlldataEmpleados():
             if(val.get("puesto")!="Representante Ventas"):

@@ -18,6 +18,15 @@ def getAllcodigodeOficinayCiudad():
                 "Ciudad":val.get("ciudad")
             })
     return codigoOficinayCiudad
+
+# Devuelve un listado con los codigos de las oficinas
+def getAllcodigodeOficina():
+    codigoOficina=[]
+    for val in getAllDataoficina():
+        codigoOficina.append(val.get("codigo_oficina"))
+    return codigoOficina
+
+
 # Devuelve un listado con la ciudad y el telefono de las ciudades en España
 def getAllCiudadytelefonoEspaña():
     ciudadyTelefonoSpain=[]
