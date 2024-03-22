@@ -39,6 +39,8 @@ def Pospagos():
                         raise Exception ("Ingrese un metodo de pago de las opciones")
                 else:
                     raise Exception("Ingrese un numero")
+            # "id_transaccion": "ak-std-000001"
+                
             # Fecha de Pago
             if(not pago.get("fecha_pago")):
                 fechapago=input("Ingresa la fecha de pago en el siguiente formato YYYY-MM-DD Todo en numeros: ") 

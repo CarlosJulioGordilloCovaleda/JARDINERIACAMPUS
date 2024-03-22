@@ -5,6 +5,12 @@ import json
 import requests
 import modules.getproducto as gP
 import modules.getgama as gG
+import modules.postClientes as Pcl
+import modules.postProducto as Pp
+import modules.postGama as Pgm
+import modules.postPago as Ppg
+import modules.posEmpleados as Pem
+
 
 def postProducto():    
     producto=dict()
@@ -145,15 +151,45 @@ def menu():
         os.system("cls")#Sirve para borrar el menu anteior seleccionado y no se haga un monton de informacion
         print("""
              
-             ---------  Administrador de productos
-             1. Guardar un producto nuevo
-             0. Atras 
+             
+ █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗██╗███████╗████████╗██████╗  █████╗ ██████╗  ██████╗ ██████╗ 
+██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║██║██╔════╝╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗██╔═══██╗██╔══██╗
+███████║██║  ██║██╔████╔██║██║██╔██╗ ██║██║███████╗   ██║   ██████╔╝███████║██║  ██║██║   ██║██████╔╝
+██╔══██║██║  ██║██║╚██╔╝██║██║██║╚██╗██║██║╚════██║   ██║   ██╔══██╗██╔══██║██║  ██║██║   ██║██╔══██╗
+██║  ██║██████╔╝██║ ╚═╝ ██║██║██║ ╚████║██║███████║   ██║   ██║  ██║██║  ██║██████╔╝╚██████╔╝██║  ██║
+╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚═╝  ╚═╝
+                                                                                                     
+
+            1. Guardar un producto nuevo
+            2. Guardar un nuevo cliente
+            3. Guardar un nuevo empleado
+            4. Guardar una nueva  Gama
+            5. Guardar un nuevo Pago
+            6. Borrar un producto
+              
+            0. Atras 
               """)
         
         opcion=int(input("Seleccione unas de las opciones : " ))
         if opcion==1:
             print(tabulate(postProducto(), headers="keys",tablefmt="github"))
             input("Presione una tecla para continuar ...")
+        elif opcion==2:
+            print(tabulate(Pcl.postClientes(), headers="keys",tablefmt="github"))
+            input("Presione una tecla para continuar ...")
+        elif opcion==3:
+            print(tabulate(Pem.postEmpleados(), headers="keys",tablefmt="github"))
+            input("Presione una tecla para continuar ...")
+        elif opcion==4:
+            print(tabulate(Pgm.PosGama(), headers="keys",tablefmt="github"))
+            input("Presione una tecla para continuar ...")
+        elif opcion==5:
+            print(tabulate(Ppg.Pospagos(), headers="keys",tablefmt="github"))
+            input("Presione una tecla para continuar ...")
+        elif opcion==6:
+            print(tabulate(Pp.postProducto(), headers="keys",tablefmt="github"))
+            input("Presione una tecla para continuar ...")
         elif opcion==0:
             break
+        
             
