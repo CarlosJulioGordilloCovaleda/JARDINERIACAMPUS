@@ -21,8 +21,10 @@ import  modules.postPago as Pp
 import modules.postGama as Pgm
 import modules.getempleado as empleado
 import modules.posEmpleados as Pem
+import modules.Postoficina as Pof
 
-
+Pof.posoficina()
+#print(list(pycountry.countries))
 #print(tabulate(empleado.getAllpuestosdir(),headers="keys",tablefmt="github"))
 #print(empleado.getAllemails())
 #Pem.postEmpleados() Terminado
@@ -32,52 +34,53 @@ import modules.posEmpleados as Pem
 #PosP.postProducto() #Terminado
 
 
-if(__name__=="__main__"):    
+
+# if(__name__=="__main__"):    
 
     
-    while True:
-        os.system("cls")
-        print(f"""
+    # while True:
+    #     os.system("cls")
+    #     print(f"""
             
            
-                 ███╗   ███╗███████╗███╗   ██╗██╗   ██╗    ██████╗ ██████╗ ██╗███╗   ██╗ ██████╗██╗██████╗  █████╗ ██╗     
-                 ████╗ ████║██╔════╝████╗  ██║██║   ██║    ██╔══██╗██╔══██╗██║████╗  ██║██╔════╝██║██╔══██╗██╔══██╗██║     
-                 ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║    ██████╔╝██████╔╝██║██╔██╗ ██║██║     ██║██████╔╝███████║██║     
-                 ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║    ██╔═══╝ ██╔══██╗██║██║╚██╗██║██║     ██║██╔═══╝ ██╔══██║██║     
-                 ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝    ██║     ██║  ██║██║██║ ╚████║╚██████╗██║██║     ██║  ██║███████╗
-                 ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝     ╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝╚═╝╚═╝     ╚═╝  ╚═╝╚══════╝
+    #              ███╗   ███╗███████╗███╗   ██╗██╗   ██╗    ██████╗ ██████╗ ██╗███╗   ██╗ ██████╗██╗██████╗  █████╗ ██╗     
+    #              ████╗ ████║██╔════╝████╗  ██║██║   ██║    ██╔══██╗██╔══██╗██║████╗  ██║██╔════╝██║██╔══██╗██╔══██╗██║     
+    #              ██╔████╔██║█████╗  ██╔██╗ ██║██║   ██║    ██████╔╝██████╔╝██║██╔██╗ ██║██║     ██║██████╔╝███████║██║     
+    #              ██║╚██╔╝██║██╔══╝  ██║╚██╗██║██║   ██║    ██╔═══╝ ██╔══██╗██║██║╚██╗██║██║     ██║██╔═══╝ ██╔══██║██║     
+    #              ██║ ╚═╝ ██║███████╗██║ ╚████║╚██████╔╝    ██║     ██║  ██║██║██║ ╚████║╚██████╗██║██║     ██║  ██║███████╗
+    #              ╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝ ╚═════╝     ╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝ ╚═════╝╚═╝╚═╝     ╚═╝  ╚═╝╚══════╝
                                                                                                           
-                    0. salir
-                    1. Clientes
-                    2. Empleados
-                    3. Oficina
-                    4. Pago
-                    5. Pedido
-                    6. Producto
-                    7. Administrador
+    #                 0. salir
+    #                 1. Clientes
+    #                 2. Empleados
+    #                 3. Oficina
+    #                 4. Pago
+    #                 5. Pedido
+    #                 6. Producto
+    #                 7. Administrador
               
-                   """)
+    #                """)
             
-        op = input("Seleccione una de las siguientes opciones ")
-        if (re.match(r'[0-9]+$',op) is not None):
-               op=int(op)
-               if(op >=0 and op<=7):
-                if op == 1:
-                    clientes.menu()
-                elif op == 2:
-                    empleado.menu()
-                elif op == 3:
-                    oficina.menu()
-                elif op == 4:
-                    pagos.menu()
-                elif op == 5:
-                    pedidos.menu()
-                elif op == 6:
-                    producto.menu()
-                elif op==7:
-                    PosP.menu()
-                elif op == 0:
-                    break
+    #     op = input("Seleccione una de las siguientes opciones ")
+    #     if (re.match(r'[0-9]+$',op) is not None):
+    #            op=int(op)
+    #            if(op >=0 and op<=7):
+    #             if op == 1:
+    #                 clientes.menu()
+    #             elif op == 2:
+    #                 empleado.menu()
+    #             elif op == 3:
+    #                 oficina.menu()
+    #             elif op == 4:
+    #                 pagos.menu()
+    #             elif op == 5:
+    #                 pedidos.menu()
+    #             elif op == 6:
+    #                 producto.menu()
+    #             elif op==7:
+    #                 PosP.menu()
+    #             elif op == 0:
+    #                 break
 
 
 
@@ -101,6 +104,6 @@ if(__name__=="__main__"):
 # country_info=CountryInfo("france")
 # ciudades=country_info.provinces()
 # print(ciudades)
-#print(list(pycountry.countries))
+# print(list(pycountry.countries))
 #print(producto.getNombresProveedores())
 #print(gG.getNombresGamma("hola"))
